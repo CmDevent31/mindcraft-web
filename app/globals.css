@@ -1,26 +1,178 @@
 @import "tailwindcss";
 
+/*
+ * santuy. Design System v1.0 — tokens as single source of truth.
+ * Task 2.1: Onest (head) + Nunito (body) via next/font variables
+ * (--font-head / --font-body set in app/layout.tsx).
+ * All usage below references tokens via var(); raw hex/px lives
+ * ONLY in :root token definitions + @theme mappings.
+ */
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Color — brand: Sky Blue */
+  --blue-light: #60c2ee;
+  --blue: #0f8ff6;
+  --blue-dark: #0b64ac;
+  /* Color — brand: Sunshine Yellow */
+  --yellow-light: #fadb6f;
+  --yellow: #f8c821;
+  --yellow-dark: #ae8c17;
+  /* Color — brand: Ember Orange (action only) */
+  --orange-light: #faa766;
+  --orange: #f77713;
+  --orange-dark: #ad530d;
+  /* Color — supporting & semantic */
+  --green: #4caf7d;
+  --ink: #15152e;
+  --paper: #f9fafb;
+  --white: #ffffff;
+  --error: #e5484d;
+  --error-light: #fbe4e4;
+  --disabled-bg: #e4dfda;
+  --disabled-fg: #a39c93;
+  --error-text-on-light: #8a2c30;
+  /* Shape */
+  --radius-pill: 999px;
+  --radius-card: 24px;
+  --radius-input: 16px;
+  /* Spacing (base unit 4px) */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+  /* Motion */
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --dur: 450ms;
+  --dur-fast: 200ms;
+  /* Type (values provided by next/font; fallbacks per DS) */
+  --font-head: "Onest", sans-serif;
+  --font-body: "Nunito", sans-serif;
+  /* Layout constants */
+  --content-max: 760px;
+  --gutter: var(--sp-5);
+  --section-rhythm: var(--sp-8);
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-blue-light: var(--blue-light);
+  --color-blue: var(--blue);
+  --color-blue-dark: var(--blue-dark);
+  --color-yellow-light: var(--yellow-light);
+  --color-yellow: var(--yellow);
+  --color-yellow-dark: var(--yellow-dark);
+  --color-orange-light: var(--orange-light);
+  --color-orange: var(--orange);
+  --color-orange-dark: var(--orange-dark);
+  --color-green: var(--green);
+  --color-ink: var(--ink);
+  --color-paper: var(--paper);
+  --color-white: var(--white);
+  --color-error: var(--error);
+  --color-error-light: var(--error-light);
+  --color-background: var(--paper);
+  --color-foreground: var(--ink);
+  --font-head: var(--font-head);
+  --font-body: var(--font-body);
+  --font-sans: var(--font-body);
+  --radius-pill: var(--radius-pill);
+  --radius-card: var(--radius-card);
+  --radius-input: var(--radius-input);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: var(--sp-4);
+    /* DS §3.1 Body 16/26 — typographic value, not spacing token */
+    line-height: 1.625rem;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  button,
+  [role="button"] {
+    font-family: var(--font-head);
+  }
+
+  h1 {
+    font-weight: 700;
+    font-size: 2.5rem;
+    line-height: 3rem;
+    letter-spacing: -0.01em;
+  }
+
+  h2 {
+    font-weight: 700;
+    font-size: 1.75rem;
+    line-height: 2.125rem;
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-weight: 600;
+    font-size: 1.25rem;
+    line-height: 1.75rem;
+    letter-spacing: -0.01em;
+  }
+
+  a {
+    color: var(--blue-dark);
+    text-underline-offset: var(--sp-1);
+  }
+
+  /* AA focus ring — 3px solid blue + 3px offset */
+  :focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 3px;
+    border-radius: var(--radius-input);
+  }
+
+  /* Touch-target floor: 44×44px (AAA-aligned, DS §7.4) */
+  button,
+  a,
+  [role="button"],
+  input,
+  select,
+  textarea {
+    min-height: 44px;
+  }
+
+  button,
+  a,
+  [role="button"] {
+    min-width: 44px;
+  }
+
+  ::selection {
+    background: var(--yellow-light);
+    color: var(--ink);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur: 1ms;
+    --dur-fast: 1ms;
+    --ease: linear;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 1ms !important;
+    transition-duration: 1ms !important;
+    scroll-behavior: auto !important;
+  }
 }
