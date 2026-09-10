@@ -1,8 +1,15 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useEffect, useMemo } from "react";
+import {
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
+import {
+  Suspense,
+  useEffect,
+  useMemo,
+} from "react";
 
 import {
   EMOTION_META,
@@ -11,14 +18,16 @@ import {
   ROUTES,
 } from "@/lib/content";
 
-export default function ResetPage() {
+function ResetContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
   const emotionParam = searchParams.get("emotion");
 
   const emotion = useMemo(() => {
-    return isEmotion(emotionParam) ? emotionParam : null;
+    return isEmotion(emotionParam)
+      ? emotionParam
+      : null;
   }, [emotionParam]);
 
   useEffect(() => {
@@ -32,7 +41,8 @@ export default function ResetPage() {
   }
 
   const meta = EMOTION_META[emotion];
-  const microStep = MICRO_STEPS_BY_EMOTION[emotion];
+  const microStep =
+    MICRO_STEPS_BY_EMOTION[emotion];
 
   return (
     <main className="min-h-screen bg-[var(--paper)] px-5 py-10 text-[var(--ink)]">
@@ -42,12 +52,18 @@ export default function ResetPage() {
             One tiny reset
           </p>
 
-          <h1>You do not have to solve everything tonight.</h1>
+          <h1>
+            You do not have to solve everything
+            tonight.
+          </h1>
 
           <p className="max-w-xl">
             You checked in with{" "}
-            <span className="font-semibold">{meta.title}</span>. Here is one
-            small thing you can do next.
+            <span className="font-semibold">
+              {meta.title}
+            </span>
+            . Here is one small thing you can do
+            next.
           </p>
         </div>
 
@@ -78,5 +94,21 @@ export default function ResetPage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function ResetPage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-[var(--paper)] px-5 py-10 text-[var(--ink)]">
+          <div className="mx-auto w-full max-w-[760px]">
+            <p>Loading your reset...</p>
+          </div>
+        </main>
+      }
+    >
+      <ResetContent />
+    </Suspense>
   );
 }

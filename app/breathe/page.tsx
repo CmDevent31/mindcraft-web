@@ -1,10 +1,19 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams, useRouter } from "next/navigation";
-import { useEffect, useMemo, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import {
+  Suspense,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 
-import { EMOTION_META, isEmotion, ROUTES } from "@/lib/content";
+import {
+  EMOTION_META,
+  isEmotion,
+  ROUTES,
+} from "@/lib/content";
 
 type PhaseName = "inhale" | "hold" | "exhale";
 
@@ -32,7 +41,7 @@ const PHASES: Phase[] = [
   },
 ];
 
-export default function BreathePage() {
+function BreatheContent() {
   const searchParams = useSearchParams();
   const router = useRouter();
 
@@ -43,7 +52,9 @@ export default function BreathePage() {
   }, [emotionParam]);
 
   const [phaseIndex, setPhaseIndex] = useState(0);
-  const [secondsLeft, setSecondsLeft] = useState(PHASES[0].duration);
+  const [secondsLeft, setSecondsLeft] = useState(
+    PHASES[0].duration
+  );
   const [cycleComplete, setCycleComplete] = useState(false);
 
   useEffect(() => {
@@ -63,7 +74,8 @@ export default function BreathePage() {
           return current - 1;
         }
 
-        const isLastPhase = phaseIndex === PHASES.length - 1;
+        const isLastPhase =
+          phaseIndex === PHASES.length - 1;
 
         if (isLastPhase) {
           setCycleComplete(true);
@@ -71,13 +83,16 @@ export default function BreathePage() {
         }
 
         const nextPhaseIndex = phaseIndex + 1;
+
         setPhaseIndex(nextPhaseIndex);
 
         return PHASES[nextPhaseIndex].duration;
       });
     }, 1000);
 
-    return () => window.clearInterval(timer);
+    return () => {
+      window.clearInterval(timer);
+    };
   }, [emotion, phaseIndex, cycleComplete]);
 
   if (!emotion) {
@@ -100,8 +115,10 @@ export default function BreathePage() {
 
           <p>
             You picked{" "}
-            <span className="font-semibold">{meta.title}</span>. No need to fix
-            everything right now.
+            <span className="font-semibold">
+              {meta.title}
+            </span>
+            . No need to fix everything right now.
           </p>
         </div>
 
@@ -118,7 +135,9 @@ export default function BreathePage() {
             />
 
             <div className="absolute z-10 flex flex-col items-center">
-              <p className="text-xl font-semibold">{phase.label}</p>
+              <p className="text-xl font-semibold">
+                {phase.label}
+              </p>
 
               <p className="mt-2 text-6xl font-bold tabular-nums">
                 {secondsLeft}
@@ -148,14 +167,16 @@ export default function BreathePage() {
           {cycleComplete ? (
             <div className="space-y-2">
               <h2>Nice. One cycle done.</h2>
+
               <p>
-                You do not have to feel completely better. A little steadier is
-                enough.
+                You do not have to feel completely better.
+                A little steadier is enough.
               </p>
             </div>
           ) : (
             <p className="max-w-md">
-              Follow the words and the timer. The circle is only a visual cue.
+              Follow the words and the timer. The
+              circle is only a visual cue.
             </p>
           )}
         </section>
@@ -179,5 +200,21 @@ export default function BreathePage() {
         </div>
       </div>
     </main>
+  );
+}
+
+export default function BreathePage() {
+  return (
+    <Suspense
+      fallback={
+        <main className="min-h-screen bg-[var(--paper)] px-5 py-10 text-[var(--ink)]">
+          <div className="mx-auto w-full max-w-[760px]">
+            <p>Loading breathing exercise...</p>
+          </div>
+        </main>
+      }
+    >
+      <BreatheContent />
+    </Suspense>
   );
 }
