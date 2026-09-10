@@ -176,3 +176,63 @@
     scroll-behavior: auto !important;
   }
 }
+
+
+
+
+.breathing-circle {
+  position: absolute;
+  width: 12rem;
+  height: 12rem;
+  border-radius: var(--radius-pill);
+  background: var(--blue-light);
+  opacity: 0.35;
+  transform: scale(0.75);
+}
+
+.breathing-inhale {
+  animation: breathe-in 4s linear forwards;
+}
+
+.breathing-hold {
+  animation: breathe-hold 7s linear forwards;
+  transform: scale(1);
+}
+
+.breathing-exhale {
+  animation: breathe-out 8s linear forwards;
+}
+
+@keyframes breathe-in {
+  from {
+    transform: scale(0.75);
+  }
+
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes breathe-hold {
+  from,
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes breathe-out {
+  from {
+    transform: scale(1);
+  }
+
+  to {
+    transform: scale(0.75);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .breathing-circle {
+    animation: none !important;
+    transform: scale(0.85);
+  }
+}
