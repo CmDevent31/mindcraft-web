@@ -2,7 +2,7 @@
 
 - [ ] 1.1 [Together] Freeze 5-route map (`/`, `/triage`, `/breathe`, `/memes/[emotion]`, `/reset`) and verify all three owners can recite their routes without overlap
 - [x] 1.2 [Alif] Create `lib/content.ts` schema (Emotion union, Meme, microStepsByEmotion, Helpline) and verify `tsc --noEmit` passes on import by all routes
-- [ ] 1.3 [Malky] Prove 1 R2 WebP loads via `next/image` on Vercel preview and verify <500ms on mobile 4G with correct alt text
+- [X] 1.3 [Malky] Prove 1 R2 WebP loads via `next/image` on Vercel preview and verify <500ms on mobile 4G with correct alt text
 
 ## 2. Shell + Landing — Alif (Days 2–6)
 
