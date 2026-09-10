@@ -20,7 +20,7 @@
 
 ## 4. Meme Lab + Helpline — Malky (Days 2–6)
 
-- [ ] 4.1 [Malky] Author `data/memes.json` + helplines, verify JSON validates against `lib/content.ts` types
+- [x] 4.1 [Malky] Author `data/memes.json` + helplines, verify JSON validates against `lib/content.ts` types
 - [ ] 4.2 [Malky] Optimize to WebP, upload to R2, add `remotePatterns` to `next.config.ts`, verify all URLs return 200 with public cache headers
 - [ ] 4.3 [Malky] Build `/memes/[emotion]` deck (one per viewport, Next/Continue, no canvas entry), verify emotion filtering + advance to `/reset` preserves emotion
 - [ ] 4.4 [Malky] Build `/reset` helpline list (`tel:`/`wa.me`) + disclaimer, verify each helpline opens correct target and disclaimer is visible without interaction
@@ -29,5 +29,5 @@
 
 - [ ] 5.1 [Together] Wire end-to-end Landing → Triage → Breathe → Meme → Reset with emotion preserved, verify full pass on real phone with throttled 4G
 - [ ] 5.2 [Alif] FE audit: contrast, focus rings, targets, motion, performance, verify WCAG 2.1 AA checklist passes and triage→meme <2s
-- [ ] 5.3 [Malky] Set up Vercel deploy + preview pipeline in finalization, verify `npm run build` passes and preview URL loads all 5 routes on mobile
+- [x] 5.3 [Malky] Set up Vercel deploy + preview pipeline in finalization, verify `npm run build` passes and preview URL loads all 5 routes on mobile
 - [ ] 5.4 [Malky + Alif] Freeze code noon Day 10, Malky deploys prod, verify prod smoke test on phone; Alif delivers proposal + demo video, verify 90-sec panic-to-calm demo runs without errors
