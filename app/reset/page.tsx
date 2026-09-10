@@ -1,15 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import {
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
-import {
-  Suspense,
-  useEffect,
-  useMemo,
-} from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useEffect, useMemo } from "react";
 
 import {
   EMOTION_META,
@@ -25,9 +18,7 @@ function ResetContent() {
   const emotionParam = searchParams.get("emotion");
 
   const emotion = useMemo(() => {
-    return isEmotion(emotionParam)
-      ? emotionParam
-      : null;
+    return isEmotion(emotionParam) ? emotionParam : null;
   }, [emotionParam]);
 
   useEffect(() => {
@@ -41,57 +32,58 @@ function ResetContent() {
   }
 
   const meta = EMOTION_META[emotion];
-  const microStep =
-    MICRO_STEPS_BY_EMOTION[emotion];
+  const microStep = MICRO_STEPS_BY_EMOTION[emotion];
 
   return (
-    <main className="min-h-screen bg-[var(--paper)] px-5 py-10 text-[var(--ink)]">
-      <div className="mx-auto flex w-full max-w-[760px] flex-col gap-8">
-        <div className="space-y-3">
-          <p className="text-sm font-semibold uppercase tracking-wide text-[var(--blue-dark)]">
-            One tiny reset
-          </p>
+    <main className="santuy-shell">
+      <div className="santuy-frame">
+        <section className="santuy-hero santuy-hero--dawn">
+          <div className="santuy-hero__top">
+            <div>
+              <p className="santuy-kicker">SANTUY</p>
+              <h1 className="santuy-title">One small step still counts.</h1>
+              <p className="santuy-subtitle">
+                You checked in with <strong>{meta.title}</strong>. Here’s one
+                tiny step to help you reset.
+              </p>
+            </div>
 
-          <h1>
-            You do not have to solve everything
-            tonight.
-          </h1>
+            <div className="santuy-progress">
+              <span className="santuy-progress__dot santuy-progress__dot--done" />
+              <span className="santuy-progress__dot santuy-progress__dot--done" />
+              <span className="santuy-progress__dot santuy-progress__dot--active" />
+            </div>
+          </div>
 
-          <p className="max-w-xl">
-            You checked in with{" "}
-            <span className="font-semibold">
-              {meta.title}
-            </span>
-            . Here is one small thing you can do
-            next.
-          </p>
-        </div>
-
-        <section className="rounded-[var(--radius-card)] bg-[var(--white)] p-6">
-          <p className="text-sm font-semibold uppercase tracking-wide text-[var(--blue-dark)]">
-            Your micro-step
-          </p>
-
-          <p className="mt-4 text-2xl font-bold leading-relaxed">
-            {microStep}
-          </p>
+          <div className="santuy-tip">
+            <span className="santuy-tip__label">Quest 3</span>
+            <p>Progress, not perfection.</p>
+          </div>
         </section>
 
-        <div className="flex flex-col gap-3 sm:flex-row">
-          <Link
-            href={ROUTES.triage}
-            className="flex min-h-11 flex-1 items-center justify-center rounded-[var(--radius-pill)] border-2 border-[var(--blue)] px-5 py-3 font-semibold no-underline"
-          >
-            Check in again
-          </Link>
+        <section className="santuy-panel">
+          <div className="microstep-card">
+            <p className="microstep-card__label">Your micro-step</p>
+            <p className="microstep-card__text">{microStep}</p>
+          </div>
 
-          <Link
-            href={ROUTES.landing}
-            className="flex min-h-11 flex-1 items-center justify-center rounded-[var(--radius-pill)] bg-[var(--orange)] px-5 py-3 font-semibold text-[var(--ink)] no-underline"
-          >
-            Back home
-          </Link>
-        </div>
+          <div className="santuy-message">
+            <h2 className="santuy-message__title">That is enough for now.</h2>
+            <p className="santuy-message__body">
+              Small steps still move you forward, even if the day feels messy.
+            </p>
+          </div>
+
+          <div className="santuy-actions">
+            <Link href={ROUTES.triage} className="pixel-btn pixel-btn--secondary">
+              Check in again
+            </Link>
+
+            <Link href={ROUTES.landing} className="pixel-btn pixel-btn--primary">
+              Back home
+            </Link>
+          </div>
+        </section>
       </div>
     </main>
   );
@@ -101,9 +93,11 @@ export default function ResetPage() {
   return (
     <Suspense
       fallback={
-        <main className="min-h-screen bg-[var(--paper)] px-5 py-10 text-[var(--ink)]">
-          <div className="mx-auto w-full max-w-[760px]">
-            <p>Loading your reset...</p>
+        <main className="santuy-shell">
+          <div className="santuy-frame">
+            <section className="santuy-panel">
+              <p>Loading your reset...</p>
+            </section>
           </div>
         </main>
       }
