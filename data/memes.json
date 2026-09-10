@@ -1,0 +1,56 @@
+[
+  {
+    "src": "/memes/exec-01.webp",
+    "alt": "Mahasiswa menatap laptop yang terbuka dengan dokumen kosong",
+    "validation": "Bukan malas. Otakmu lagi nge-buffer, dan itu manusiawi.",
+    "emotion": "executive-dysfunction"
+  },
+  {
+    "src": "/memes/exec-02.webp",
+    "alt": "Daftar tugas panjang dengan satu centang di paling bawah",
+    "validation": "Satu centang tetap dihitung. Beneran.",
+    "emotion": "executive-dysfunction"
+  },
+  {
+    "src": "/memes/exec-03.webp",
+    "alt": "Seseorang membuka laptop lalu menutupnya lagi tanpa mengerjakan apa pun",
+    "validation": "Mulai itu bagian paling berat. Kamu belum gagal.",
+    "emotion": "executive-dysfunction"
+  },
+  {
+    "src": "/memes/social-01.webp",
+    "alt": "Seseorang memutar ulang percakapan di kepalanya sebelum tidur",
+    "validation": "Cuma kamu yang masih ingat momen itu. Serius.",
+    "emotion": "social-hangxiety"
+  },
+  {
+    "src": "/memes/social-02.webp",
+    "alt": "Layar ponsel dengan pesan yang sudah diketik tapi belum dikirim",
+    "validation": "Nggak semua obrolan harus sempurna dulu baru dikirim.",
+    "emotion": "social-hangxiety"
+  },
+  {
+    "src": "/memes/social-03.webp",
+    "alt": "Seseorang berlatih menyapa di depan cermin sebelum keluar kamar",
+    "validation": "Canggung bukan berarti kamu aneh. Itu cuma gugup biasa.",
+    "emotion": "social-hangxiety"
+  },
+  {
+    "src": "/memes/imposter-01.webp",
+    "alt": "Mahasiswa duduk di kelas merasa paling tidak paham di antara temannya",
+    "validation": "Merasa kurang pintar bukan bukti kamu kurang pintar.",
+    "emotion": "academic-imposter"
+  },
+  {
+    "src": "/memes/imposter-02.webp",
+    "alt": "Seseorang membandingkan layar kerjanya dengan layar kerja orang lain",
+    "validation": "Kamu lagi bandingin proses kamu sama hasil akhir orang lain.",
+    "emotion": "academic-imposter"
+  },
+  {
+    "src": "/memes/imposter-03.webp",
+    "alt": "Satu nilai jelek ditulis besar di antara banyak nilai bagus yang terabaikan",
+    "validation": "Satu nilai bukan ringkasan dari siapa kamu.",
+    "emotion": "academic-imposter"
+  }
+]
