@@ -12,7 +12,9 @@ import {
 } from "react";
 
 import {
+  DISCLAIMER,
   EMOTION_META,
+  HELPLINES,
   isEmotion,
   MICRO_STEPS_BY_EMOTION,
   ROUTES,
@@ -77,6 +79,33 @@ function ResetContent() {
           </p>
         </section>
 
+        <section className="rounded-[var(--radius-card)] bg-[var(--white)] p-6">
+          <p className="text-sm font-semibold uppercase tracking-wide text-[var(--blue-dark)]">
+            If you want to talk to someone
+          </p>
+
+          <ul className="mt-4 flex flex-col gap-3">
+            {HELPLINES.map((line) => (
+                <li key={line.name}>
+                
+                <a href={line.href}
+                className="flex min-h-11 flex-col justify-center rounded-[var(--radius-card)] bg-[var(--paper)] px-5 py-4 no-underline">
+                  <span className="font-semibold text-[var(--ink)]">
+                    {line.name}
+                  </span>
+                  <span className="font-bold text-[var(--blue-dark)]">
+                    {line.number}
+                  </span>
+                  <span className="mt-1 text-sm text-[var(--ink)]">
+                    {line.note}
+                  </span>
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+        
+
         <div className="flex flex-col gap-3 sm:flex-row">
           <Link
             href={ROUTES.triage}
@@ -92,6 +121,9 @@ function ResetContent() {
             Back home
           </Link>
         </div>
+        <p className="text-sm leading-relaxed text-[var(--ink)]">
+          {DISCLAIMER}
+        </p>
       </div>
     </main>
   );

@@ -21,9 +21,9 @@
 ## 4. Meme Lab + Helpline — Malky (Days 2–6)
 
 - [x] 4.1 [Malky] Author `data/memes.json` + helplines, verify JSON validates against `lib/content.ts` types
-- [ ] 4.2 [Malky] Optimize to WebP, upload to R2, add `remotePatterns` to `next.config.ts`, verify all URLs return 200 with public cache headers
-- [ ] 4.3 [Malky] Build `/memes/[emotion]` deck (one per viewport, Next/Continue, no canvas entry), verify emotion filtering + advance to `/reset` preserves emotion
-- [ ] 4.4 [Malky] Build `/reset` helpline list (`tel:`/`wa.me`) + disclaimer, verify each helpline opens correct target and disclaimer is visible without interaction
+- [x] 4.2 [Malky] Optimize to WebP, upload to R2, add `remotePatterns` to `next.config.ts`, verify all URLs return 200 with public cache headers
+- [x] 4.3 [Malky] Build `/memes/[emotion]` deck (one per viewport, Next/Continue, no canvas entry), verify emotion filtering + advance to `/reset` preserves emotion
+- [x] 4.4 [Malky] Build `/reset` helpline list (`tel:`/`wa.me`) + disclaimer, verify each helpline opens correct target and disclaimer is visible without interaction
 
 ## 5. Integrate + Audit + Freeze + Deploy (Days 7–10)
 
