@@ -236,3 +236,143 @@
     transform: scale(0.85);
   }
 }
+
+/*
+ * Global button system — change global-button-variants.
+ * `.btn` carries shared structure + tactile press mechanics only;
+ * color lives in `.btn-primary` / `.btn-secondary` (task group 2).
+ * Focus-visible is inherited from the global `:focus-visible` rule above
+ * (DS §7.3) — no per-button override. Reduced-motion is inherited from
+ * the global `prefers-reduced-motion` collapse — transitions drop to ~0ms.
+ */
+@layer components {
+  .btn {
+    display: flex;
+    width: 100%;
+    /* Fixed control height per design (explicit requirement); clears the 44px floor. */
+    height: 46px;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2);
+    padding: 0 var(--sp-5);
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-head);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      transform var(--dur-fast) var(--ease),
+      box-shadow var(--dur-fast) var(--ease),
+      background-color var(--dur-fast) var(--ease);
+  }
+
+  /* Shared press mechanics — variants supply their own shadow colors. */
+  .btn:not(:disabled):active {
+    transform: translateY(2px);
+  }
+
+  /* Task 2.1: Primary — filled --blue, white bold label (DS §9.1).
+     Resting treatment only; hover/active shadow physics land in 3.1. */
+  .btn-primary {
+    background-color: var(--blue);
+    border-color: var(--blue-dark);
+    color: var(--white);
+    box-shadow: 0 4px var(--blue-dark);
+  }
+
+  /* Task 2.2: Secondary — light surface, --orange label, soft
+     token-mixed hairline border + shadow. Resting treatment only. */
+  .btn-secondary {
+    background-color: var(--white);
+    border-color: color-mix(in srgb, var(--orange-dark) 16%, transparent);
+    color: var(--orange);
+    box-shadow: 0 3px color-mix(in srgb, var(--ink) 10%, transparent);
+  }
+
+  /* Hover pop + pressed physics per variant. Hover is gated behind
+     (hover: hover) so touch taps never stick in a hovered state, and
+     guards keep the inert state untouched. :active sorts after :hover
+     and re-states the shift so the press always wins while both match. */
+  @media (hover: hover) {
+    .btn-primary:not(:disabled):not([aria-disabled="true"]):hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px var(--blue-dark);
+    }
+
+    .btn-secondary:not(:disabled):not([aria-disabled="true"]):hover {
+      transform: translateY(-1px);
+      border-color: transparent;
+      box-shadow: 0 6px color-mix(in srgb, var(--ink) 10%, transparent);
+    }
+  }
+
+  .btn-primary:not(:disabled):not([aria-disabled="true"]):active {
+    transform: translateY(2px);
+    box-shadow: 0 1px var(--blue-dark);
+  }
+
+  .btn-secondary:not(:disabled):not([aria-disabled="true"]):active {
+    transform: translateY(2px);
+    box-shadow: 0 1px color-mix(in srgb, var(--ink) 10%, transparent);
+  }
+
+  /* Task 1.2: inert state. Native <button disabled> is unfocusable and
+     ignores pointer/keyboard activation; `.btn` on <a> uses aria-disabled. */
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    background-color: var(--disabled-bg);
+    border-color: transparent;
+    color: var(--disabled-fg);
+    box-shadow: none;
+    transform: none;
+    cursor: not-allowed;
+  }
+
+  .btn[aria-disabled="true"] {
+    pointer-events: none;
+  }
+}
+
+/*
+ * Meme deck enter transition — replayed per tap via React key remount.
+ * Slides in from the travel direction with a fade; transform + opacity
+ * only (GPU). Taps are user-paced, so predetermined keyframes are fine.
+ * Reduced motion inherits the global collapse above (all animations → 1ms).
+ */
+@keyframes meme-enter-next {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes meme-enter-prev {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.meme-enter-next {
+  animation: meme-enter-next var(--dur-fast) var(--ease);
+}
+
+.meme-enter-prev {
+  animation: meme-enter-prev var(--dur-fast) var(--ease);
+}

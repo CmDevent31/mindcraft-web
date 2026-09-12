@@ -107,16 +107,19 @@ function ResetContent() {
         
 
         <div className="flex flex-col gap-3 sm:flex-row">
+          {/* Task 3.2: global button system adoption — Secondary for the
+              quiet alternative, Primary for the main path forward. `flex-1`
+              kept for layout; all visual styling comes from `.btn`. */}
           <Link
             href={ROUTES.triage}
-            className="flex min-h-11 flex-1 items-center justify-center rounded-[var(--radius-pill)] border-2 border-[var(--blue)] px-5 py-3 font-semibold no-underline"
+            className="btn btn-secondary flex-1"
           >
             Check in again
           </Link>
 
           <Link
             href={ROUTES.landing}
-            className="flex min-h-11 flex-1 items-center justify-center rounded-[var(--radius-pill)] bg-[var(--orange)] px-5 py-3 font-semibold text-[var(--ink)] no-underline"
+            className="btn btn-primary flex-1"
           >
             Back home
           </Link>

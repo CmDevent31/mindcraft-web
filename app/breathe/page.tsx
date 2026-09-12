@@ -184,7 +184,7 @@ function BreatheContent() {
         <div className="flex w-full flex-col gap-3 sm:flex-row">
           <Link
             href={memeRoute}
-            className="flex min-h-11 flex-1 items-center justify-center rounded-[var(--radius-pill)] border-2 border-[var(--blue)] px-5 py-3 font-semibold no-underline"
+            className="btn btn-secondary flex-1"
           >
             Skip
           </Link>
@@ -192,7 +192,7 @@ function BreatheContent() {
           {cycleComplete && (
             <Link
               href={memeRoute}
-              className="flex min-h-11 flex-1 items-center justify-center rounded-[var(--radius-pill)] bg-[var(--orange)] px-5 py-3 font-semibold text-[var(--ink)] no-underline"
+              className="btn btn-primary flex-1"
             >
               Continue
             </Link>
