@@ -102,6 +102,7 @@ function BreatheContent() {
   const phase = PHASES[phaseIndex];
   const meta = EMOTION_META[emotion];
   const memeRoute = ROUTES.memes(emotion);
+  const resetHref = `${ROUTES.reset}?emotion=${emotion}`;
 
   return (
     <main className="min-h-screen bg-[var(--paper)] px-5 py-10 text-[var(--ink)]">
@@ -182,20 +183,36 @@ function BreatheContent() {
         </section>
 
         <div className="flex w-full flex-col gap-3 sm:flex-row">
-          <Link
-            href={memeRoute}
-            className="btn btn-secondary flex-1"
-          >
-            Skip
-          </Link>
-
-          {cycleComplete && (
-            <Link
-              href={memeRoute}
-              className="btn btn-primary flex-1"
-            >
-              Continue
-            </Link>
+          {!cycleComplete ? (
+            <>
+              <Link
+                href={resetHref}
+                className="btn btn-secondary flex-1"
+              >
+                Skip to micro-step
+              </Link>
+              <Link
+                href={memeRoute}
+                className="btn btn-secondary flex-1"
+              >
+                Skip to meme
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link
+                href={resetHref}
+                className="btn btn-secondary flex-1"
+              >
+                Skip to micro-step
+              </Link>
+              <Link
+                href={memeRoute}
+                className="btn btn-primary flex-1"
+              >
+                Continue to meme
+              </Link>
+            </>
           )}
         </div>
       </div>

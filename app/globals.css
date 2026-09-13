@@ -322,6 +322,30 @@
     box-shadow: 0 1px color-mix(in srgb, var(--ink) 10%, transparent);
   }
 
+  /* Get Help variant — same tactile system, action-orange colors.
+     Sole exception to the one-Primary rule: crisis help must stay
+     orange (DS action-color rule). Width auto: it lives in the header,
+     not in full-width CTA rows. */
+  .btn-help {
+    width: auto;
+    background-color: var(--orange);
+    border-color: var(--orange-dark);
+    color: var(--white);
+    box-shadow: 0 4px var(--orange-dark);
+  }
+
+  @media (hover: hover) {
+    .btn-help:not(:disabled):not([aria-disabled="true"]):hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px var(--orange-dark);
+    }
+  }
+
+  .btn-help:not(:disabled):not([aria-disabled="true"]):active {
+    transform: translateY(2px);
+    box-shadow: 0 1px var(--orange-dark);
+  }
+
   /* Task 1.2: inert state. Native <button disabled> is unfocusable and
      ignores pointer/keyboard activation; `.btn` on <a> uses aria-disabled. */
   .btn:disabled,

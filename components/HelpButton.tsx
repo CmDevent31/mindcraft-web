@@ -43,17 +43,17 @@ function PhoneIcon() {
 }
 
 /**
- * Persistent Get Help entry — DS §9.1 Help variant: `--orange` fill,
- * bold `--white` label + icon (approved brand pairing), pill radius.
- * Rendered in the site header (all viewports); the mobile tab bar
- * carries its own Help tab built from the same `useResetHref`.
+ * Persistent Get Help entry — same tactile `.btn` system as every other
+ * button (46px, pill, pop hover, press collapse), but in action-orange
+ * via `.btn-help`. Orange is load-bearing here: the DS reserves it for
+ * Get Help so crisis help never reads as a regular action.
  */
 export default function HelpButton({ className = "" }: { className?: string }) {
   return (
     <Link
       href={useResetHref()}
       aria-label="Get help now — open helplines"
-      className={`inline-flex min-h-11 items-center justify-center gap-[var(--sp-2)] rounded-pill bg-orange px-[var(--sp-5)] py-3 font-head text-base font-bold text-white no-underline transition-transform duration-[var(--dur-fast)] ease-[var(--ease)] active:scale-[0.96] ${className}`}
+      className={`btn btn-help ${className}`}
     >
       <PhoneIcon />
       Get Help
