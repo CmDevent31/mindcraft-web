@@ -17,6 +17,7 @@ export default function MemeDeck({
   title: string;
 }) {
   const [index, setIndex] = useState(0);
+  const [direction, setDirection] = useState<1 | -1>(1);
 
   const meme = memes[index];
   const isLast = index === memes.length - 1;
@@ -43,44 +44,76 @@ export default function MemeDeck({
             Meme {index + 1} of {memes.length}
           </p>
 
-          <div className="mt-4 overflow-hidden rounded-[var(--radius-card)]">
-            <Image
-              key={meme.src}
-              src={meme.src}
-              alt={meme.alt}
-              width={900}
-              height={900}
-              priority={index === 0}
-              sizes="(max-width: 760px) 100vw, 760px"
-              className="h-auto w-full"
-            />
-          </div>
+          {/* Keyed so each tap remounts and replays the enter animation
+              from the travel direction. Counter stays unkeyed above so
+              screen readers announce it reliably. */}
+          <div
+            key={index}
+            className={
+              direction > 0 ? "meme-enter-next" : "meme-enter-prev"
+            }
+          >
+            <div className="mt-4 overflow-hidden rounded-[var(--radius-card)]">
+              <Image
+                src={meme.src}
+                alt={meme.alt}
+                width={900}
+                height={900}
+                priority={index === 0}
+                sizes="(max-width: 760px) 100vw, 760px"
+                className="h-auto w-full"
+              />
+            </div>
 
-          <p className="mt-5 text-lg font-semibold leading-relaxed">
-            {meme.validation}
-          </p>
+            <p className="mt-5 text-lg font-semibold leading-relaxed">
+              {meme.validation}
+            </p>
+          </div>
         </section>
 
         <div className="flex flex-col gap-3 sm:flex-row">
+          {index > 0 && (
+            <button
+              type="button"
+              onClick={() => {
+                setDirection(-1);
+                setIndex(index - 1);
+              }}
+              className="btn btn-secondary flex-1"
+            >
+              Previous meme
+            </button>
+          )}
+
           {!isLast && (
             <button
               type="button"
-              onClick={() => setIndex(index + 1)}
-              className="flex min-h-11 flex-1 items-center justify-center rounded-[var(--radius-pill)] border-2 border-[var(--blue)] px-5 py-3 font-semibold"
+              onClick={() => {
+                setDirection(1);
+                setIndex(index + 1);
+              }}
+              className="btn btn-primary flex-1"
             >
               Next meme
             </button>
           )}
 
+          {isLast && (
+            <Link
+              href={resetHref}
+              className="btn btn-primary flex-1"
+            >
+              Continue
+            </Link>
+          )}
+        </div>
+
+        <div className="text-center">
           <Link
             href={resetHref}
-            className={
-              isLast
-                ? "flex min-h-11 flex-1 items-center justify-center rounded-[var(--radius-pill)] bg-[var(--orange)] px-5 py-3 font-semibold text-[var(--ink)] no-underline"
-                : "flex min-h-11 flex-1 items-center justify-center rounded-[var(--radius-pill)] border-2 border-[var(--blue)] px-5 py-3 font-semibold no-underline"
-            }
+            className="text-sm font-semibold text-orange underline underline-offset-4"
           >
-            {isLast ? "Continue" : "Skip to reset"}
+            Skip to reset
           </Link>
         </div>
       </div>
