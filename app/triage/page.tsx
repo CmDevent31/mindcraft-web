@@ -5,6 +5,14 @@ export default function TriagePage() {
   return (
     <main className="min-h-screen bg-[var(--paper)] px-5 py-10 text-[var(--blue)]">
       <div className="mx-auto flex w-full max-w-[760px] flex-col gap-8">
+        <Link
+          href={ROUTES.landing}
+          aria-label="Back to home"
+          className="btn btn-secondary w-auto self-start px-[var(--sp-5)]"
+        >
+          ← Back to home
+        </Link>
+
         <div className="space-y-3">
           <p className="text-sm font-semibold uppercase tracking-wide">
             Quick check-in

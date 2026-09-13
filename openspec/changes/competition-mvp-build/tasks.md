@@ -8,7 +8,7 @@
 
 - [x] 2.1 [Alif] Replace Geist with Onest+Nunito and port Design System tokens to `app/globals.css`, verify no raw hex/px remains via visual diff
 - [x] 2.2 [Alif] Build `app/layout.tsx` + bottom tab bar + persistent HelpButton + footer disclaimer, verify Help reaches `/reset` from every route on 360px viewport
-- [ ] 2.3 [Alif] Build `/` landing hero + Start CTA to `/triage`, verify tap reaches `/triage` in ≤2s with ≥44×44px targets
+- [x] 2.3 [Alif] Build `/` landing hero + Start CTA to `/triage`, verify tap reaches `/triage` in ≤2s with ≥44×44px targets
 - [ ] 2.4 [Alif] Deliver illustrations + validation copy bank in DS voice, verify copy is non-diagnostic and plain-language
 
 ## 3. Triage + Breathing + Micro-step — Jo (Days 2–6)
