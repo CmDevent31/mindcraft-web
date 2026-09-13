@@ -13,7 +13,7 @@ See proposal.md (Why). Current state: route pages hand-style their own CTA links
 
 - Restyling `HelpButton`/tab bar or migrating existing pages to the new classes (follow-up change).
 - Icon slots, sizes beyond the single 46px height, loading spinners.
-- Migrating `HelpButton` to `.btn-primary`, ever: crisis help keeps `--orange` as the sole exception per the DS action-color rule ("Orange always means action").
+- Migrating `HelpButton` to `.btn-primary`, ever: crisis help keeps `--orange` as the sole exception per the DS action-color rule ("Orange always means action"). LIFTED by user decision: `HelpButton` now uses the shared tactile system via a `.btn-help` variant (same 46px/pill/pop/press mechanics, orange colors) — still never `.btn-primary`.
 
 ## Decisions
 
