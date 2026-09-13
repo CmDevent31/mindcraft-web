@@ -5,7 +5,8 @@ import { EMOTION_META, EMOTIONS, ROUTES } from "@/lib/content";
  * Landing (/) — santuy. Design System v1.0 is the source of truth.
  * Server Component: static sections only. The FAQ uses native
  * <details>/<summary> so it stays interactive with zero client JS.
- * Motion: static plus tactile button states only (MOTION 3).
+ * Motion: static plus tactile button states and a 500ms FAQ
+ * accordion transition only (MOTION 3).
  * One eyebrow on the whole page (demo section, per brief).
  */
 
@@ -232,13 +233,13 @@ function Faq() {
             <details
               key={item.q}
               open={i === 0}
-              className="group border-b border-ink/10 py-[var(--sp-4)] first:border-t"
+              className="border-b border-ink/10 py-[var(--sp-4)] last:border-b-0"
             >
               <summary className="flex cursor-pointer list-none items-center justify-between gap-[var(--sp-4)] font-head text-lg font-semibold text-ink [&::-webkit-details-marker]:hidden">
                 {item.q}
                 <span
                   aria-hidden="true"
-                  className="flex h-6 w-6 shrink-0 items-center justify-center text-ink/60 transition-transform duration-200 group-open:rotate-180"
+                  className="faq-chevron flex h-6 w-6 shrink-0 items-center justify-center text-ink/60"
                 >
                   <svg
                     width="20"
@@ -254,9 +255,13 @@ function Faq() {
                   </svg>
                 </span>
               </summary>
-              <p className="max-w-[60ch] pt-[var(--sp-3)] text-[15px] leading-relaxed text-ink/70">
-                {item.a}
-              </p>
+              <div className="faq-panel">
+                <div>
+                  <p className="max-w-[60ch] pt-[var(--sp-3)] text-[15px] leading-relaxed text-ink/70">
+                    {item.a}
+                  </p>
+                </div>
+              </div>
             </details>
           ))}
         </div>
