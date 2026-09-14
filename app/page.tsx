@@ -6,7 +6,8 @@ import { EMOTION_META, EMOTIONS, ROUTES } from "@/lib/content";
  * Landing (/) — santuy. Design System v1.0 is the source of truth.
  * Server Component: static sections only. The FAQ uses native
  * <details>/<summary> so it stays interactive with zero client JS.
- * Motion: static plus tactile button states only (MOTION 3).
+ * Motion: static plus tactile button states and a 500ms FAQ
+ * accordion transition only (MOTION 3).
  * One eyebrow on the whole page (demo section, per brief).
  */
 
@@ -224,21 +225,44 @@ function Closing() {
 function Faq() {
   return (
     <section aria-labelledby="faq-title" id="faq" className={SECTION}>
-      <div className={`${CONTAINER} flex flex-col gap-[var(--sp-4)]`}>
+      <div className={`${CONTAINER} flex flex-col gap-[var(--sp-5)]`}>
         <h2 id="faq-title" className={H2}>
-          Questions students ask
+          Frequently asked questions
         </h2>
-        <div className="flex flex-col gap-[var(--sp-3)]">
-          {FAQS.map((item) => (
+        <div className="flex flex-col">
+          {FAQS.map((item, i) => (
             <details
               key={item.q}
-              className="rounded-[var(--radius-card)] bg-white px-[var(--sp-4)] py-[var(--sp-3)]"
-              style={{ boxShadow: "0 4px 14px rgba(21,21,46,.08)" }}
+              open={i === 0}
+              className="border-b border-ink/10 py-[var(--sp-4)] last:border-b-0"
             >
-              <summary className="cursor-pointer font-head text-base font-bold text-ink">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-[var(--sp-4)] font-head text-lg font-semibold text-ink [&::-webkit-details-marker]:hidden">
                 {item.q}
+                <span
+                  aria-hidden="true"
+                  className="faq-chevron flex h-6 w-6 shrink-0 items-center justify-center text-ink/60"
+                >
+                  <svg
+                    width="20"
+                    height="20"
+                    viewBox="0 0 20 20"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  >
+                    <path d="m5 7.5 5 5 5-5" />
+                  </svg>
+                </span>
               </summary>
-              <p className="pt-[var(--sp-2)] text-base leading-relaxed text-ink">{item.a}</p>
+              <div className="faq-panel">
+                <div>
+                  <p className="max-w-[60ch] pt-[var(--sp-3)] text-[15px] leading-relaxed text-ink/70">
+                    {item.a}
+                  </p>
+                </div>
+              </div>
             </details>
           ))}
         </div>

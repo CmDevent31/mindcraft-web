@@ -46,8 +46,10 @@
   --sp-8: 64px;
   /* Motion */
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --dur: 450ms;
   --dur-fast: 200ms;
+  --dur-medium: 500ms;
   /* Type (values provided by next/font; fallbacks per DS) */
   --font-head: "Onest", sans-serif;
   --font-body: "Nunito", sans-serif;
@@ -166,6 +168,7 @@
     --dur: 1ms;
     --dur-fast: 1ms;
     --ease: linear;
+    --ease-out: linear;
   }
 
   *,
@@ -416,4 +419,69 @@
 .marquee-track {
   animation: marquee-scroll 40s linear infinite;
   will-change: transform;
+}
+ * FAQ accordion — CSS transition only, zero client JS.
+ * Native <details> hides its content instantly on close, so
+ * animating an inner wrapper alone can never smooth the
+ * close. Instead the UA's ::details-content box is animated
+ * 0 <-> auto (needs interpolate-size), which moves siblings
+ * down/up instead of hiding the answer. Opacity + a 4px
+ * drift fade the text; the chevron rotates on the same
+ * curve so open and close read as one motion.
+ */
+#faq details {
+  interpolate-size: allow-keywords;
+}
+
+#faq details::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition:
+    block-size var(--dur-medium) var(--ease-out),
+    content-visibility var(--dur-medium) var(--ease-out);
+  transition-behavior: allow-discrete;
+}
+
+#faq details[open]::details-content {
+  block-size: auto;
+}
+
+.faq-panel > div {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.faq-panel p {
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity var(--dur-medium) var(--ease-out),
+    transform var(--dur-medium) var(--ease-out);
+}
+
+#faq details[open] > .faq-panel p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.faq-chevron {
+  transition: transform var(--dur-medium) var(--ease-out);
+}
+
+#faq details[open] .faq-chevron {
+  transform: rotate(180deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #faq details::details-content {
+    transition: none;
+  }
+
+  .faq-panel p {
+    transition: opacity var(--dur-fast) linear;
+  }
+
+  .faq-chevron {
+    transition: none;
+  }
 }
