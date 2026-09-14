@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MarqueeBanner from "@/components/MarqueeBanner";
 import { EMOTION_META, EMOTIONS, ROUTES } from "@/lib/content";
 
 /**
@@ -250,6 +251,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <MarqueeBanner />
       <Demo />
       <Issues />
       <Features />
