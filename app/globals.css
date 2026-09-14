@@ -405,6 +405,21 @@
 }
 
 /*
+ * Running banner — seamless infinite leftward loop. Track holds four
+ * identical rows; translating -50% (two rows) loops without a jump and
+ * stays covered on ultrawide. Speed: full pass ~40s (slow, calm).
+ * Reduced motion inherits the global collapse (animations → 1ms).
+ */
+@keyframes marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-scroll 40s linear infinite;
+  will-change: transform;
+}
  * FAQ accordion — CSS transition only, zero client JS.
  * Native <details> hides its content instantly on close, so
  * animating an inner wrapper alone can never smooth the

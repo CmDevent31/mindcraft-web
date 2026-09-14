@@ -1,4 +1,5 @@
 import Link from "next/link";
+import MarqueeBanner from "@/components/MarqueeBanner";
 import { EMOTION_META, EMOTIONS, ROUTES } from "@/lib/content";
 
 /**
@@ -72,8 +73,8 @@ function Hero() {
           <p className={`${BODY} text-lg`}>
             A stigma free first aid kit for stressed students. Breathe, laugh, then take one tiny step.
           </p>
-          <div className="flex w-full flex-col gap-[var(--sp-3)] sm:flex-row">
-            <Link href={ROUTES.triage} className="btn btn-primary flex-1 sm:flex-none sm:px-8">
+          <div className="flex flex-col gap-[var(--sp-3)] sm:flex-row">
+            <Link href={ROUTES.triage} className="btn btn-primary w-auto self-start px-8">
               Start check-in
             </Link>
           </div>
@@ -274,6 +275,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <MarqueeBanner />
       <Demo />
       <Issues />
       <Features />
