@@ -420,6 +420,8 @@
   animation: marquee-scroll 40s linear infinite;
   will-change: transform;
 }
+
+/*
  * FAQ accordion — CSS transition only, zero client JS.
  * Native <details> hides its content instantly on close, so
  * animating an inner wrapper alone can never smooth the
