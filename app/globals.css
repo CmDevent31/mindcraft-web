@@ -422,7 +422,7 @@
 }
 
 /*
- * FAQ accordion — CSS transition only, zero client JS.
+ * FAQ + Features accordions — CSS transition only.
  * Native <details> hides its content instantly on close, so
  * animating an inner wrapper alone can never smooth the
  * close. Instead the UA's ::details-content box is animated
@@ -431,11 +431,13 @@
  * drift fade the text; the chevron rotates on the same
  * curve so open and close read as one motion.
  */
-#faq details {
+#faq details,
+#features details {
   interpolate-size: allow-keywords;
 }
 
-#faq details::details-content {
+#faq details::details-content,
+#features details::details-content {
   block-size: 0;
   overflow: clip;
   transition:
@@ -444,7 +446,8 @@
   transition-behavior: allow-discrete;
 }
 
-#faq details[open]::details-content {
+#faq details[open]::details-content,
+#features details[open]::details-content {
   block-size: auto;
 }
 
@@ -461,7 +464,8 @@
     transform var(--dur-medium) var(--ease-out);
 }
 
-#faq details[open] > .faq-panel p {
+#faq details[open] > .faq-panel p,
+#features details[open] > .faq-panel p {
   opacity: 1;
   transform: translateY(0);
 }
@@ -470,12 +474,55 @@
   transition: transform var(--dur-medium) var(--ease-out);
 }
 
-#faq details[open] .faq-chevron {
+#faq details[open] .faq-chevron,
+#features details[open] .faq-chevron {
   transform: rotate(180deg);
 }
 
+/*
+ * Features accordion rows — one shared column template for the
+ * summary row and the body row, so the step title and its
+ * description always share the same left edge. Change the
+ * icon column here once instead of syncing indents per element.
+ */
+#features .steps-cols {
+  display: grid;
+  grid-template-columns: 2.75rem 1fr auto;
+  column-gap: var(--sp-3);
+}
+
+/*
+ * Features auto-advance progress — a linear scaleX fill that runs
+ * for exactly one rotation interval (see ROTATE_MS in
+ * components/StepsAccordion.tsx). transform + opacity only,
+ * linear because it is constant motion. Remounts (key change)
+ * restart it in sync with the timer.
+ */
+@keyframes steps-progress-fill {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+#features .steps-progress-fill {
+  transform-origin: left center;
+  background: var(--orange);
+  animation: steps-progress-fill 6s linear forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
-  #faq details::details-content {
+  #features .steps-progress-fill {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #faq details::details-content,
+  #features details::details-content {
     transition: none;
   }
 

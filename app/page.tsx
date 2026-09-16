@@ -1,5 +1,6 @@
 import Link from "next/link";
 import MarqueeBanner from "@/components/MarqueeBanner";
+import StepsAccordion from "@/components/StepsAccordion";
 import { EMOTION_META, EMOTIONS, ROUTES } from "@/lib/content";
 
 /**
@@ -12,7 +13,7 @@ import { EMOTION_META, EMOTIONS, ROUTES } from "@/lib/content";
  */
 
 const CONTAINER = "mx-auto w-full max-w-[1080px] px-[var(--gutter)]";
-const SECTION = "py-[var(--section-rhythm)]";
+const SECTION = "py-[var(--section-rhythm)] scroll-mt-[calc(var(--sp-8)+var(--sp-4))]";
 const H2 = "text-balance font-head text-3xl font-bold leading-tight text-ink md:text-4xl";
 const BODY = "max-w-[65ch] text-base leading-relaxed text-ink";
 
@@ -174,26 +175,29 @@ function Issues() {
 function Features() {
   return (
     <section aria-labelledby="features-title" id="features" className={SECTION}>
-      <div className={`${CONTAINER} flex flex-col gap-[var(--sp-5)]`}>
-        <div className="flex flex-col gap-[var(--sp-3)]">
-          <h2 id="features-title" className={H2}>
-            Four small steps, one calmer you
-          </h2>
-          <p className={BODY}>
-            The full flow takes a few minutes. Every step is skippable except feeling validated, which is automatic.
+      <div className={`${CONTAINER} grid items-start gap-[var(--sp-6)] lg:grid-cols-[50fr_50fr]`}>
+        <div className="flex flex-col gap-[var(--sp-5)]">
+          <div className="flex flex-col gap-[var(--sp-3)]">
+            <h2 id="features-title" className={H2}>
+              Four small steps, one calmer you
+            </h2>
+            <p className={BODY}>
+              The full flow takes a few minutes. Every step is skippable except feeling validated, which is automatic.
+            </p>
+          </div>
+          <StepsAccordion steps={STEPS} />
+        </div>
+        {/* Lo-fi visual slot: neutral placeholder until step artwork is ready. */}
+        <div
+          role="img"
+          aria-label="Flow preview placeholder"
+          className="flex aspect-[4/3] w-full flex-col items-center justify-center gap-[var(--sp-2)] rounded-[var(--radius-card)] border-2 border-dashed border-ink/20 bg-white p-[var(--sp-5)] text-center lg:aspect-auto lg:self-stretch"
+        >
+          <p className="font-head text-xl font-bold text-ink">Flow preview</p>
+          <p className="max-w-[40ch] text-sm leading-relaxed text-ink/70">
+            Step visuals go here once they are ready.
           </p>
         </div>
-        <ol
-          className="flex flex-col gap-[var(--sp-5)] border-l-2 pl-[var(--sp-5)]"
-          style={{ borderColor: "var(--blue-light)" }}
-        >
-          {STEPS.map((step) => (
-            <li key={step.title} className="flex flex-col gap-[var(--sp-2)]">
-              <h3 className="font-head text-xl font-semibold text-ink">{step.title}</h3>
-              <p className="max-w-[65ch] text-base leading-relaxed text-ink">{step.body}</p>
-            </li>
-          ))}
-        </ol>
       </div>
     </section>
   );
