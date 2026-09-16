@@ -1,7 +1,7 @@
 ## 1. Four-steps section redesign
 
-- [ ] 1.1 Restyle Features section as numbered card/stepper grid (stack on mobile, multi-column on md+) with aria-hidden numerals, preserving STEPS copy and order, and verify all four steps render in order with no overlap at 360px and 1080px widths
-- [ ] 1.2 Verify four-steps heading hierarchy (h2 section, h3 per step) and CTA-free section keyboard behavior intact via tab-through check
+- [x] 1.1 Restyle Features section as numbered card/stepper grid (stack on mobile, multi-column on md+) with aria-hidden numerals, preserving STEPS copy and order, and verify all four steps render in order with no overlap at 360px and 1080px widths
+- [x] 1.2 Verify four-steps heading hierarchy (h2 section, h3 per step) and CTA-free section keyboard behavior intact via tab-through check
 
 ## 2. Stress-shows-up section redesign
 
