@@ -510,7 +510,7 @@
 
 #features .steps-progress-fill {
   transform-origin: left center;
-  background: color-mix(in srgb, var(--ink) 70%, transparent);
+  background: var(--orange);
   animation: steps-progress-fill 6s linear forwards;
 }
 

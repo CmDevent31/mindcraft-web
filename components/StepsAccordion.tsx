@@ -106,19 +106,21 @@ export default function StepsAccordion({ steps }: { steps: readonly Step[] }) {
               <span
                 aria-hidden="true"
                 className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-input)] transition-colors duration-[var(--dur-fast)] ease-[var(--ease)] ${
-                  active === i ? "bg-ink text-white" : "bg-ink/5 text-ink/40"
+                  active === i
+                    ? "bg-[color-mix(in_srgb,var(--blue)_10%,transparent)] text-blue-dark"
+                    : "bg-ink/5 text-ink/60"
                 }`}
               >
                 <HugeiconsIcon
                   icon={STEP_ICONS[i]}
                   size={22}
                   color="currentColor"
-                  strokeWidth={1.5}
+                  strokeWidth={2}
                 />
               </span>
               <h3
-                className={`font-head text-lg font-semibold transition-colors duration-[var(--dur-fast)] ease-[var(--ease)] ${
-                  active === i ? "text-ink" : "text-ink/50"
+                className={`font-head text-xl font-semibold transition-colors duration-[var(--dur-fast)] ease-[var(--ease)] ${
+                  active === i ? "text-ink" : "text-ink/70"
                 }`}
               >
                 {step.title}
@@ -133,7 +135,7 @@ export default function StepsAccordion({ steps }: { steps: readonly Step[] }) {
             <div className="faq-panel steps-cols items-start">
               <span aria-hidden="true" />
               <div>
-                <p className="max-w-[60ch] text-[15px] leading-relaxed text-ink/70">
+                <p className="max-w-[60ch] text-base leading-relaxed text-ink/70">
                   {step.body}
                 </p>
               </div>
@@ -142,7 +144,7 @@ export default function StepsAccordion({ steps }: { steps: readonly Step[] }) {
           {active === i && started && inView && !reduceMotion && (
             <span
               aria-hidden="true"
-              className="absolute inset-x-0 -bottom-px block h-[2px] overflow-hidden rounded-full bg-ink/10"
+              className="absolute inset-x-0 -bottom-px block h-[2px] overflow-hidden rounded-full bg-[color-mix(in_srgb,var(--orange)_15%,transparent)]"
             >
               <span
                 key={`progress-${cycle}`}
