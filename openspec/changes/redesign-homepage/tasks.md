@@ -14,8 +14,8 @@
 
 ## 4. Circular pill navbar
 
-- [ ] 4.1 Convert SiteHeader inner container to floating rounded-pill (radius-pill, top/side margins, white surface with border/shadow) keeping sticky positioning, brand link, HelpButton, and width switch, and verify pill appears detached with page background visible on all sides on every route
-- [ ] 4.2 Add scroll-margin to anchored sections (#demo #issues #features #faq) and verify anchor jumps do not hide headings under the pill navbar
+- [x] 4.1 Convert SiteHeader inner container to floating rounded-pill (radius-pill, top/side margins, white surface with border/shadow) keeping sticky positioning, brand link, HelpButton, and width switch, and verify pill appears detached with page background visible on all sides on every route
+- [x] 4.2 Add scroll-margin to anchored sections (#demo #issues #features #faq) and verify anchor jumps do not hide headings under the pill navbar
 
 ## 5. Footer redesign
 

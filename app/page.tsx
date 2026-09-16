@@ -12,7 +12,7 @@ import { EMOTION_META, EMOTIONS, ROUTES } from "@/lib/content";
  */
 
 const CONTAINER = "mx-auto w-full max-w-[1080px] px-[var(--gutter)]";
-const SECTION = "py-[var(--section-rhythm)]";
+const SECTION = "py-[var(--section-rhythm)] scroll-mt-[calc(var(--sp-8)+var(--sp-4))]";
 const H2 = "text-balance font-head text-3xl font-bold leading-tight text-ink md:text-4xl";
 const BODY = "max-w-[65ch] text-base leading-relaxed text-ink";
 
