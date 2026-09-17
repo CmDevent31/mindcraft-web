@@ -108,7 +108,7 @@ export default function StepsAccordion({ steps }: { steps: readonly Step[] }) {
                 className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-input)] transition-colors duration-[var(--dur-fast)] ease-[var(--ease)] ${
                   active === i
                     ? "bg-[color-mix(in_srgb,var(--blue)_10%,transparent)] text-blue-dark"
-                    : "bg-ink/5 text-ink/60"
+                    : "bg-ink/2 text-ink/30"
                 }`}
               >
                 <HugeiconsIcon
