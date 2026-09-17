@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
 import MarqueeBanner from "@/components/MarqueeBanner";
 import StepsAccordion from "@/components/StepsAccordion";
 import { EMOTION_META, EMOTIONS, ROUTES } from "@/lib/content";
@@ -65,8 +67,40 @@ const FAQS = [
 
 function Hero() {
   return (
-    <section aria-labelledby="hero-title" className="pt-[var(--sp-7)] md:pt-[var(--sp-8)]">
-      <div className={`${CONTAINER} grid items-center gap-[var(--sp-6)] md:grid-cols-2`}>
+    <section aria-labelledby="hero-title" className="relative overflow-hidden pt-[var(--sp-7)] md:pt-[var(--sp-8)]">
+      {/* Page backdrop doodles: soft DS-tint blobs so paper never reads flat.
+          Static shapes only (MOTION 3), aria-hidden, no interaction. */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <div
+          className="absolute -left-24 -top-24 h-72 w-72 rounded-full"
+          style={{ backgroundColor: "color-mix(in srgb, var(--blue-light) 22%, transparent)" }}
+        />
+        <div
+          className="absolute -right-20 top-10 h-56 w-56 rounded-full"
+          style={{ backgroundColor: "color-mix(in srgb, var(--yellow) 28%, transparent)" }}
+        />
+        <svg
+          width="36"
+          height="36"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="absolute left-[12%] top-8 hidden sm:block"
+          style={{ color: "var(--blue)", opacity: 0.5, transform: "rotate(-12deg)" }}
+        >
+          <path d="M12 0c.9 6.6 4.4 10.1 12 12-7.6 1.9-11.1 5.4-12 12-.9-6.6-4.4-10.1-12-12C7.6 10.1 11.1 6.6 12 0Z" />
+        </svg>
+        <svg
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="currentColor"
+          className="absolute bottom-6 right-[18%] hidden sm:block"
+          style={{ color: "var(--orange)", opacity: 0.45, transform: "rotate(14deg)" }}
+        >
+          <path d="M12 0c.9 6.6 4.4 10.1 12 12-7.6 1.9-11.1 5.4-12 12-.9-6.6-4.4-10.1-12-12C7.6 10.1 11.1 6.6 12 0Z" />
+        </svg>
+      </div>
+      <div className={`${CONTAINER} relative grid items-center gap-[var(--sp-6)] md:grid-cols-2`}>
         <div className="flex flex-col gap-[var(--sp-4)]">
           <h1 id="hero-title" className="text-balance font-head text-4xl font-bold leading-none tracking-tight text-ink md:text-5xl">
             Rough day? Get unstuck in minutes.
@@ -77,6 +111,7 @@ function Hero() {
           <div className="flex flex-col gap-[var(--sp-3)] sm:flex-row">
             <Link href={ROUTES.triage} className="btn btn-primary w-auto self-start px-8">
               Start check-in
+              <HugeiconsIcon icon={ArrowRight01Icon} size={20} color="currentColor" strokeWidth={2} />
             </Link>
           </div>
         </div>
@@ -205,21 +240,46 @@ function Features() {
 
 function Closing() {
   return (
-    <section aria-labelledby="closing-title" className={SECTION}>
-      <div className={CONTAINER}>
+    <section
+      aria-labelledby="closing-title"
+      className="relative overflow-hidden bg-white"
+    >
+      <div className="flex w-full items-stretch">
+        {/* Left illustration slot: flush to the viewport edge and the
+            section top/bottom, fills the gutter beside the centered copy
+            on lg+. Hidden on mobile, where no such gap exists. Replace
+            with next/image (fill + object-cover) once art is ready. */}
         <div
-          className="flex flex-col items-start gap-[var(--sp-4)] rounded-[var(--radius-card)] p-[var(--sp-6)]"
-          style={{ backgroundColor: "var(--yellow-light)" }}
+          role="img"
+          aria-label="Left illustration placeholder, recommended 1280 by 800 pixels"
+          className="hidden w-full flex-1 flex-col items-center justify-center gap-[var(--sp-2)] border-y-2 border-r-2 border-dashed border-ink/20 bg-paper p-[var(--sp-5)] text-center lg:flex"
         >
-          <h2 id="closing-title" className={H2}>
+          <p className="font-head text-lg font-bold text-ink">Illustration slot</p>
+          <p className="max-w-[30ch] text-sm leading-relaxed text-ink/70">
+            Left art goes here. Export at 1280 x 800px.
+          </p>
+        </div>
+        <div className="flex w-full flex-col items-center justify-center gap-[var(--sp-4)] px-[var(--gutter)] py-[var(--sp-7)] text-center lg:max-w-[520px] lg:shrink-0">
+          <h2 id="closing-title" className={`${H2} text-ink`}>
             Ready when you are
           </h2>
-          <p className={BODY}>
+          <p className={`${BODY} mx-auto text-center text-ink`}>
             Sixty seconds from now you could be breathing easier. Your future self says thanks.
           </p>
-          <Link href={ROUTES.triage} className="btn btn-primary w-full sm:w-auto sm:px-8">
+          <Link href={ROUTES.triage} className="btn btn-primary w-full justify-center px-8 sm:w-auto">
             Start check-in
           </Link>
+        </div>
+        {/* Right illustration slot: mirrors the left. Same sizing. */}
+        <div
+          role="img"
+          aria-label="Right illustration placeholder, recommended 1280 by 800 pixels"
+          className="hidden w-full flex-1 flex-col items-center justify-center gap-[var(--sp-2)] border-y-2 border-l-2 border-dashed border-ink/20 bg-paper p-[var(--sp-5)] text-center lg:flex"
+        >
+          <p className="font-head text-lg font-bold text-ink">Illustration slot</p>
+          <p className="max-w-[30ch] text-sm leading-relaxed text-ink/70">
+            Right art goes here. Export at 1280 x 800px.
+          </p>
         </div>
       </div>
     </section>
