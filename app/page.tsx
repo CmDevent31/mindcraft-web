@@ -1,4 +1,6 @@
 import Link from "next/link";
+import { HugeiconsIcon } from "@hugeicons/react";
+import { ArrowRight01Icon } from "@hugeicons/core-free-icons";
 import MarqueeBanner from "@/components/MarqueeBanner";
 import StepsAccordion from "@/components/StepsAccordion";
 import { EMOTION_META, EMOTIONS, ROUTES } from "@/lib/content";
@@ -77,6 +79,7 @@ function Hero() {
           <div className="flex flex-col gap-[var(--sp-3)] sm:flex-row">
             <Link href={ROUTES.triage} className="btn btn-primary w-auto self-start px-8">
               Start check-in
+              <HugeiconsIcon icon={ArrowRight01Icon} size={20} color="currentColor" strokeWidth={2} />
             </Link>
           </div>
         </div>
@@ -205,21 +208,46 @@ function Features() {
 
 function Closing() {
   return (
-    <section aria-labelledby="closing-title" className={SECTION}>
-      <div className={CONTAINER}>
+    <section
+      aria-labelledby="closing-title"
+      className="relative overflow-hidden bg-white"
+    >
+      <div className="flex w-full items-stretch">
+        {/* Left illustration slot: flush to the viewport edge and the
+            section top/bottom, fills the gutter beside the centered copy
+            on lg+. Hidden on mobile, where no such gap exists. Replace
+            with next/image (fill + object-cover) once art is ready. */}
         <div
-          className="flex flex-col items-start gap-[var(--sp-4)] rounded-[var(--radius-card)] p-[var(--sp-6)]"
-          style={{ backgroundColor: "var(--yellow-light)" }}
+          role="img"
+          aria-label="Left illustration placeholder, recommended 1280 by 800 pixels"
+          className="hidden w-full flex-1 flex-col items-center justify-center gap-[var(--sp-2)] border-y-2 border-r-2 border-dashed border-ink/20 bg-paper p-[var(--sp-5)] text-center lg:flex"
         >
-          <h2 id="closing-title" className={H2}>
+          <p className="font-head text-lg font-bold text-ink">Illustration slot</p>
+          <p className="max-w-[30ch] text-sm leading-relaxed text-ink/70">
+            Left art goes here. Export at 1280 x 800px.
+          </p>
+        </div>
+        <div className="flex w-full flex-col items-center justify-center gap-[var(--sp-4)] px-[var(--gutter)] py-[var(--sp-7)] text-center lg:max-w-[520px] lg:shrink-0">
+          <h2 id="closing-title" className={`${H2} text-ink`}>
             Ready when you are
           </h2>
-          <p className={BODY}>
+          <p className={`${BODY} mx-auto text-center text-ink`}>
             Sixty seconds from now you could be breathing easier. Your future self says thanks.
           </p>
-          <Link href={ROUTES.triage} className="btn btn-primary w-full sm:w-auto sm:px-8">
+          <Link href={ROUTES.triage} className="btn btn-primary w-full justify-center px-8 sm:w-auto">
             Start check-in
           </Link>
+        </div>
+        {/* Right illustration slot: mirrors the left. Same sizing. */}
+        <div
+          role="img"
+          aria-label="Right illustration placeholder, recommended 1280 by 800 pixels"
+          className="hidden w-full flex-1 flex-col items-center justify-center gap-[var(--sp-2)] border-y-2 border-l-2 border-dashed border-ink/20 bg-paper p-[var(--sp-5)] text-center lg:flex"
+        >
+          <p className="font-head text-lg font-bold text-ink">Illustration slot</p>
+          <p className="max-w-[30ch] text-sm leading-relaxed text-ink/70">
+            Right art goes here. Export at 1280 x 800px.
+          </p>
         </div>
       </div>
     </section>
