@@ -67,40 +67,8 @@ const FAQS = [
 
 function Hero() {
   return (
-    <section aria-labelledby="hero-title" className="relative overflow-hidden pt-[var(--sp-7)] md:pt-[var(--sp-8)]">
-      {/* Page backdrop doodles: soft DS-tint blobs so paper never reads flat.
-          Static shapes only (MOTION 3), aria-hidden, no interaction. */}
-      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
-        <div
-          className="absolute -left-24 -top-24 h-72 w-72 rounded-full"
-          style={{ backgroundColor: "color-mix(in srgb, var(--blue-light) 22%, transparent)" }}
-        />
-        <div
-          className="absolute -right-20 top-10 h-56 w-56 rounded-full"
-          style={{ backgroundColor: "color-mix(in srgb, var(--yellow) 28%, transparent)" }}
-        />
-        <svg
-          width="36"
-          height="36"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="absolute left-[12%] top-8 hidden sm:block"
-          style={{ color: "var(--blue)", opacity: 0.5, transform: "rotate(-12deg)" }}
-        >
-          <path d="M12 0c.9 6.6 4.4 10.1 12 12-7.6 1.9-11.1 5.4-12 12-.9-6.6-4.4-10.1-12-12C7.6 10.1 11.1 6.6 12 0Z" />
-        </svg>
-        <svg
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-          className="absolute bottom-6 right-[18%] hidden sm:block"
-          style={{ color: "var(--orange)", opacity: 0.45, transform: "rotate(14deg)" }}
-        >
-          <path d="M12 0c.9 6.6 4.4 10.1 12 12-7.6 1.9-11.1 5.4-12 12-.9-6.6-4.4-10.1-12-12C7.6 10.1 11.1 6.6 12 0Z" />
-        </svg>
-      </div>
-      <div className={`${CONTAINER} relative grid items-center gap-[var(--sp-6)] md:grid-cols-2`}>
+    <section aria-labelledby="hero-title" className="pt-[var(--sp-7)] md:pt-[var(--sp-8)]">
+      <div className={`${CONTAINER} grid items-center gap-[var(--sp-6)] md:grid-cols-2`}>
         <div className="flex flex-col gap-[var(--sp-4)]">
           <h1 id="hero-title" className="text-balance font-head text-4xl font-bold leading-none tracking-tight text-ink md:text-5xl">
             Rough day? Get unstuck in minutes.

@@ -19,7 +19,7 @@
 
 ## 5. Footer redesign
 
-- [ ] 5.1 Restyle SiteFooter inner wrapper as finished rounded card block preserving DISCLAIMER verbatim and Home/Check-in links, and verify disclaimer plus both links are visible and navigate correctly on every route
+- [x] 5.1 Restyle SiteFooter inner wrapper as finished rounded card block preserving DISCLAIMER verbatim and Home/Check-in links, and verify disclaimer plus both links are visible and navigate correctly on every route
 
 ## 6. Verification
 

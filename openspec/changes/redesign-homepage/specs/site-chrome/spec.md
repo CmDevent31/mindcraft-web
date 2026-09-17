@@ -29,12 +29,12 @@ The system SHALL keep the brand link navigating to `/` (with `aria-current="page
 
 ### Requirement: Footer presents refreshed closing block
 
-The system SHALL render the footer with the existing `DISCLAIMER` text verbatim and the Home (`/`) and Check-in (`/triage`) nav links, in a visually finished treatment distinct from the page background, using design-system tokens only.
+The system SHALL render the footer as a full-width closing block (brand + illustration on the left; Explore and Get help link columns on the right; copyright line along a bottom hairline) in a visually finished treatment distinct from the page background, using design-system tokens only. Explore links SHALL cover Home (`/`), Check-in (`/triage`), and Breathe (`/breathe`); Get help links SHALL target the official helplines (`HELPLINES`).
 
-#### Scenario: Footer disclaimer and links are always visible
+#### Scenario: Footer links are always visible
 
 - **WHEN** a visitor reaches the bottom of any route without interaction
-- **THEN** the disclaimer paragraph and both footer links are visible, and each link navigates to its route
+- **THEN** the brand, illustration, both link columns, and the bottom copyright line are visible, and each link navigates to its route or helpline
 
 ### Requirement: Site chrome is responsive and accessible
 
