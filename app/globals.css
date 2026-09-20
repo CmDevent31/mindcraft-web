@@ -1,41 +1,92 @@
 @import "tailwindcss";
 
 /*
- * santuy. Design System v1.0 — tokens as single source of truth.
- * Task 2.1: Onest (head) + Nunito (body) via next/font variables
- * (--font-head / --font-body set in app/layout.tsx).
- * All usage below references tokens via var(); raw hex/px lives
- * ONLY in :root token definitions + @theme mappings.
+ * santuy. Design System v1.0
+ *
+ * Global CSS hanya berisi:
+ * - design tokens
+ * - Tailwind theme mapping
+ * - global typography
+ * - accessibility defaults
+ *
+ * Styling khusus halaman seperti /triage, /breathe, /reset
+ * sebaiknya berada di CSS Module masing-masing.
  */
 
 :root {
-  /* Color — brand: Sky Blue */
+  /* =========================================
+     BRAND COLORS
+     ========================================= */
+
+  /* Sky Blue */
   --blue-light: #60c2ee;
   --blue: #0f8ff6;
   --blue-dark: #0b64ac;
-  /* Color — brand: Sunshine Yellow */
+
+  /* Sunshine Yellow */
   --yellow-light: #fadb6f;
   --yellow: #f8c821;
   --yellow-dark: #ae8c17;
-  /* Color — brand: Ember Orange (action only) */
+
+  /* Ember Orange */
   --orange-light: #faa766;
   --orange: #f77713;
   --orange-dark: #ad530d;
-  /* Color — supporting & semantic */
+
+  /* Supporting colors */
   --green: #4caf7d;
+
+  /* Neutral colors */
   --ink: #15152e;
   --paper: #f9fafb;
   --white: #ffffff;
+
+  /* Semantic colors */
   --error: #e5484d;
   --error-light: #fbe4e4;
+  --error-text-on-light: #8a2c30;
+
   --disabled-bg: #e4dfda;
   --disabled-fg: #a39c93;
-  --error-text-on-light: #8a2c30;
-  /* Shape */
+
+  /* =========================================
+     SANTUY GAME PALETTE
+     ========================================= */
+
+  --game-navy-950: #061424;
+  --game-navy-900: #071b33;
+  --game-navy-850: #08233f;
+  --game-navy-800: #0c2c4f;
+  --game-navy-700: #173e69;
+
+  --game-blue-500: #477bb2;
+  --game-blue-400: #77a8d9;
+  --game-blue-300: #b9d8ff;
+
+  --game-green-500: #34b95e;
+  --game-green-400: #55e87b;
+  --game-green-300: #80ff92;
+
+  --game-cream: #fff3df;
+
+  --game-wood-700: #5c331d;
+  --game-wood-600: #6f3f20;
+  --game-wood-500: #8c512a;
+  --game-wood-400: #ad7040;
+
+  /* =========================================
+     SHAPE
+     ========================================= */
+
   --radius-pill: 999px;
   --radius-card: 24px;
   --radius-input: 16px;
-  /* Spacing (base unit 4px) */
+
+  /* =========================================
+     SPACING
+     Base unit: 4px
+     ========================================= */
+
   --sp-1: 4px;
   --sp-2: 8px;
   --sp-3: 12px;
@@ -44,58 +95,117 @@
   --sp-6: 32px;
   --sp-7: 48px;
   --sp-8: 64px;
-  /* Motion */
+
+  /* =========================================
+     MOTION
+     ========================================= */
+
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-bounce: cubic-bezier(0.18, 0.9, 0.2, 1);
+
   --dur: 450ms;
   --dur-fast: 200ms;
-  /* Type (values provided by next/font; fallbacks per DS) */
+  --dur-slow: 800ms;
+
+  /* =========================================
+     TYPE
+     next/font provides the actual variables
+     through app/layout.tsx.
+     ========================================= */
+
   --font-head: "Onest", sans-serif;
   --font-body: "Nunito", sans-serif;
-  /* Layout constants */
+
+  /*
+   * Temporary game-style fallback.
+   * Nanti kalau kita pakai pixel font original/legal,
+   * variable ini tinggal diganti di satu tempat.
+   */
+  --font-game:
+    "Courier New",
+    "Lucida Console",
+    ui-monospace,
+    monospace;
+
+  /* =========================================
+     LAYOUT
+     ========================================= */
+
   --content-max: 760px;
   --gutter: var(--sp-5);
   --section-rhythm: var(--sp-8);
 }
 
+/* =============================================
+   TAILWIND THEME MAPPING
+   ============================================= */
+
 @theme inline {
   --color-blue-light: var(--blue-light);
   --color-blue: var(--blue);
   --color-blue-dark: var(--blue-dark);
+
   --color-yellow-light: var(--yellow-light);
   --color-yellow: var(--yellow);
   --color-yellow-dark: var(--yellow-dark);
+
   --color-orange-light: var(--orange-light);
   --color-orange: var(--orange);
   --color-orange-dark: var(--orange-dark);
+
   --color-green: var(--green);
+
   --color-ink: var(--ink);
   --color-paper: var(--paper);
   --color-white: var(--white);
+
   --color-error: var(--error);
   --color-error-light: var(--error-light);
+
   --color-background: var(--paper);
   --color-foreground: var(--ink);
+
   --font-head: var(--font-head);
   --font-body: var(--font-body);
   --font-sans: var(--font-body);
+
   --radius-pill: var(--radius-pill);
   --radius-card: var(--radius-card);
   --radius-input: var(--radius-input);
 }
 
+/* =============================================
+   BASE STYLES
+   ============================================= */
+
 @layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
   html {
     scroll-behavior: smooth;
+  }
+
+  html,
+  body {
+    margin: 0;
+    padding: 0;
+    min-height: 100%;
   }
 
   body {
     background: var(--paper);
     color: var(--ink);
+
     font-family: var(--font-body);
     font-size: var(--sp-4);
-    /* DS §3.1 Body 16/26 — typographic value, not spacing token */
     line-height: 1.625rem;
+
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
   }
 
   h1,
@@ -107,6 +217,8 @@
   }
 
   h1 {
+    margin: 0;
+
     font-weight: 700;
     font-size: 2.5rem;
     line-height: 3rem;
@@ -114,6 +226,8 @@
   }
 
   h2 {
+    margin: 0;
+
     font-weight: 700;
     font-size: 1.75rem;
     line-height: 2.125rem;
@@ -121,10 +235,32 @@
   }
 
   h3 {
+    margin: 0;
+
     font-weight: 600;
     font-size: 1.25rem;
     line-height: 1.75rem;
     letter-spacing: -0.01em;
+  }
+
+  p {
+    margin-top: 0;
+  }
+
+  img,
+  picture,
+  video,
+  canvas,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+
+  button,
+  input,
+  textarea,
+  select {
+    font: inherit;
   }
 
   a {
@@ -132,14 +268,19 @@
     text-underline-offset: var(--sp-1);
   }
 
-  /* AA focus ring — 3px solid blue + 3px offset */
+  /*
+   * Accessibility:
+   * visible keyboard focus ring.
+   */
   :focus-visible {
     outline: 3px solid var(--blue);
     outline-offset: 3px;
     border-radius: var(--radius-input);
   }
 
-  /* Touch-target floor: 44×44px (AAA-aligned, DS §7.4) */
+  /*
+   * Touch-target floor.
+   */
   button,
   a,
   [role="button"],
@@ -161,590 +302,50 @@
   }
 }
 
+/* =============================================
+   ACCESSIBILITY — REDUCED MOTION
+   ============================================= */
+
 @media (prefers-reduced-motion: reduce) {
   :root {
     --dur: 1ms;
     --dur-fast: 1ms;
+    --dur-slow: 1ms;
     --ease: linear;
+    --ease-bounce: linear;
+  }
+
+  html {
+    scroll-behavior: auto;
   }
 
   *,
   *::before,
   *::after {
     animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
     transition-duration: 1ms !important;
     scroll-behavior: auto !important;
   }
 }
 
+/* =============================================
+   SMALL SCREEN BASE ADJUSTMENTS
+   ============================================= */
 
-
-
-.breathing-circle {
-  position: absolute;
-  width: 12rem;
-  height: 12rem;
-  border-radius: var(--radius-pill);
-  background: var(--blue-light);
-  opacity: 0.35;
-  transform: scale(0.75);
-}
-
-.breathing-inhale {
-  animation: breathe-in 4s linear forwards;
-}
-
-.breathing-hold {
-  animation: breathe-hold 7s linear forwards;
-  transform: scale(1);
-}
-
-.breathing-exhale {
-  animation: breathe-out 8s linear forwards;
-}
-
-@keyframes breathe-in {
-  from {
-    transform: scale(0.75);
+@media (max-width: 480px) {
+  :root {
+    --gutter: var(--sp-4);
+    --section-rhythm: var(--sp-7);
   }
 
-  to {
-    transform: scale(1);
-  }
-}
-
-@keyframes breathe-hold {
-  from,
-  to {
-    transform: scale(1);
-  }
-}
-
-@keyframes breathe-out {
-  from {
-    transform: scale(1);
+  h1 {
+    font-size: 2rem;
+    line-height: 2.4rem;
   }
 
-  to {
-    transform: scale(0.75);
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .breathing-circle {
-    animation: none !important;
-    transform: scale(0.85);
-  }
-}
-
-
-/* =========================
-   SANTUY REDESIGN
-   ========================= */
-
-.santuy-shell {
-  min-height: 100vh;
-  padding: 24px 16px 40px;
-  background:
-    radial-gradient(circle at top, rgba(120, 186, 255, 0.18), transparent 30%),
-    linear-gradient(180deg, #eef7ff 0%, var(--paper) 100%);
-  color: var(--ink);
-}
-
-.santuy-frame {
-  width: 100%;
-  max-width: 760px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.santuy-hero {
-  border: 3px solid var(--blue);
-  border-radius: var(--radius-card);
-  padding: 20px;
-  box-shadow: 0 10px 0 rgba(19, 70, 134, 0.12);
-  position: relative;
-  overflow: hidden;
-}
-
-.santuy-hero::before,
-.santuy-hero::after {
-  content: "";
-  position: absolute;
-  border-radius: 999px;
-  opacity: 0.35;
-}
-
-.santuy-hero::before {
-  width: 140px;
-  height: 140px;
-  top: -30px;
-  right: -20px;
-  background: rgba(255, 255, 255, 0.28);
-}
-
-.santuy-hero::after {
-  width: 90px;
-  height: 90px;
-  bottom: -18px;
-  left: -10px;
-  background: rgba(255, 255, 255, 0.18);
-}
-
-.santuy-hero--sunset {
-  background: linear-gradient(180deg, #ffd9a8 0%, #ffefcf 42%, #d8f2ff 100%);
-}
-
-.santuy-hero--night {
-  background: linear-gradient(180deg, #1b3561 0%, #2d5ca1 60%, #96d7ff 120%);
-  color: #ffffff;
-}
-
-.santuy-hero--night .santuy-kicker,
-.santuy-hero--night .santuy-subtitle,
-.santuy-hero--night .santuy-tip {
-  color: #eef6ff;
-}
-
-.santuy-hero--dawn {
-  background: linear-gradient(180deg, #bedfff 0%, #dff2ff 40%, #fff2d9 100%);
-}
-
-.santuy-hero__top {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  align-items: flex-start;
-}
-
-.santuy-kicker {
-  margin: 0 0 8px;
-  font-size: 0.8rem;
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--blue-dark);
-}
-
-.santuy-title {
-  margin: 0;
-  font-size: clamp(2rem, 5vw, 3rem);
-  line-height: 1.05;
-  font-weight: 900;
-  max-width: 12ch;
-  text-wrap: balance;
-}
-
-.santuy-subtitle {
-  margin: 12px 0 0;
-  max-width: 60ch;
-  line-height: 1.7;
-  font-size: 1rem;
-}
-
-.santuy-progress {
-  display: flex;
-  gap: 8px;
-  margin-top: 4px;
-  flex-shrink: 0;
-}
-
-.santuy-progress__dot {
-  width: 16px;
-  height: 16px;
-  border-radius: 4px;
-  border: 2px solid var(--blue-dark);
-  background: rgba(255, 255, 255, 0.5);
-}
-
-.santuy-progress__dot--active {
-  background: #73d87d;
-  box-shadow: 0 0 0 3px rgba(115, 216, 125, 0.2);
-}
-
-.santuy-progress__dot--done {
-  background: var(--blue);
-}
-
-.santuy-tip {
-  margin-top: 18px;
-  display: inline-flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 14px 16px;
-  border-radius: 18px;
-  background: rgba(255, 255, 255, 0.68);
-  border: 2px solid rgba(19, 70, 134, 0.12);
-  max-width: 420px;
-  backdrop-filter: blur(4px);
-}
-
-.santuy-tip__label {
-  font-size: 0.78rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--blue-dark);
-}
-
-.santuy-panel {
-  border: 3px solid var(--blue);
-  border-radius: var(--radius-card);
-  background: var(--white);
-  padding: 20px;
-  box-shadow: 0 10px 0 rgba(19, 70, 134, 0.08);
-}
-
-.emotion-grid {
-  display: grid;
-  gap: 16px;
-}
-
-.emotion-card {
-  display: grid;
-  grid-template-columns: 72px 1fr;
-  gap: 16px;
-  align-items: center;
-  padding: 16px;
-  border: 2px solid rgba(19, 70, 134, 0.18);
-  border-radius: 22px;
-  background: linear-gradient(180deg, #ffffff 0%, #f7fbff 100%);
-  text-decoration: none;
-  color: inherit;
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    border-color 0.18s ease;
-}
-
-.emotion-card:hover,
-.emotion-card:focus-visible {
-  transform: translateY(-2px);
-  border-color: var(--blue);
-  box-shadow: 0 12px 20px rgba(19, 70, 134, 0.12);
-  outline: none;
-}
-
-.emotion-card__icon {
-  width: 72px;
-  height: 72px;
-  border-radius: 18px;
-  display: grid;
-  place-items: center;
-  border: 2px solid rgba(0, 0, 0, 0.08);
-  box-shadow: inset 0 -8px 0 rgba(0, 0, 0, 0.08);
-  font-weight: 900;
-}
-
-.emotion-card__icon--grass {
-  background: linear-gradient(180deg, #66c866 0%, #8ae28a 25%, #9d7a54 25%, #815d40 100%);
-}
-
-.emotion-card__icon--water {
-  background: linear-gradient(180deg, #90dcff 0%, #4da8ff 100%);
-}
-
-.emotion-card__icon--amethyst {
-  background: linear-gradient(180deg, #c8b4ff 0%, #8065ef 100%);
-}
-
-.emotion-card__face {
-  padding: 4px 8px;
-  border-radius: 10px;
-  background: rgba(255, 255, 255, 0.2);
-  color: #ffffff;
-}
-
-.emotion-card__content {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-.emotion-card__title {
-  margin: 0;
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: var(--blue-dark);
-}
-
-.emotion-card__tagline {
-  margin: 0;
-  line-height: 1.6;
-  color: rgba(20, 33, 61, 0.8);
-}
-
-.emotion-card__cta {
-  grid-column: 1 / -1;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-top: 4px;
-  font-weight: 700;
-  color: var(--blue-dark);
-}
-
-.santuy-panel--breathing {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.breathing-stage {
-  position: relative;
-  min-height: 320px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 26px;
-  background:
-    radial-gradient(circle at center, rgba(164, 232, 255, 0.4), transparent 45%),
-    linear-gradient(180deg, #f7fcff 0%, #eef7ff 100%);
-  overflow: hidden;
-}
-
-.breathing-stage__content {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  max-width: 280px;
-  padding: 20px;
-}
-
-.breathing-stage__phase {
-  margin: 0;
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--blue-dark);
-}
-
-.breathing-stage__count {
-  margin: 8px 0;
-  font-size: clamp(4rem, 12vw, 5.5rem);
-  line-height: 1;
-  font-weight: 900;
-  color: var(--ink);
-}
-
-.breathing-stage__helper {
-  margin: 0;
-  line-height: 1.6;
-  color: rgba(20, 33, 61, 0.78);
-}
-
-.breathing-circle {
-  position: absolute;
-  width: 170px;
-  height: 170px;
-  border-radius: 32px;
-  background:
-    radial-gradient(circle at 30% 30%, #d6ffeb 0%, #98f5ca 42%, #6ad7a5 100%);
-  opacity: 0.9;
-  transform: scale(0.75);
-  box-shadow:
-    0 0 0 8px rgba(141, 229, 195, 0.16),
-    0 0 40px rgba(75, 189, 143, 0.25);
-}
-
-.breathing-inhale {
-  animation: breathe-in 4s linear forwards;
-}
-
-.breathing-hold {
-  animation: breathe-hold 7s linear forwards;
-  transform: scale(1);
-}
-
-.breathing-exhale {
-  animation: breathe-out 8s linear forwards;
-}
-
-@keyframes breathe-in {
-  from {
-    transform: scale(0.75);
-  }
-  to {
-    transform: scale(1);
-  }
-}
-
-@keyframes breathe-hold {
-  from,
-  to {
-    transform: scale(1);
-  }
-}
-
-@keyframes breathe-out {
-  from {
-    transform: scale(1);
-  }
-  to {
-    transform: scale(0.75);
-  }
-}
-
-.breathing-legend {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: center;
-}
-
-.breathing-legend__chip {
-  padding: 10px 14px;
-  border-radius: 999px;
-  background: var(--paper);
-  border: 2px solid transparent;
-  font-size: 0.95rem;
-  font-weight: 700;
-}
-
-.breathing-legend__chip--active {
-  background: #dff8e4;
-  border-color: #6ecf84;
-  color: #1d5d2f;
-}
-
-.santuy-message {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 16px 18px;
-  border-radius: 20px;
-  background: #f7fbff;
-  border: 2px solid rgba(19, 70, 134, 0.1);
-}
-
-.santuy-message__title {
-  margin: 0;
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--blue-dark);
-}
-
-.santuy-message__body {
-  margin: 0;
-  line-height: 1.65;
-}
-
-.microstep-card {
-  padding: 22px;
-  border-radius: 24px;
-  background:
-    linear-gradient(180deg, #fff9ef 0%, #ffefcf 100%);
-  border: 3px solid #d7b171;
-  box-shadow: inset 0 -8px 0 rgba(163, 117, 47, 0.08);
-}
-
-.microstep-card__label {
-  margin: 0;
-  font-size: 0.85rem;
-  font-weight: 800;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #7b5c24;
-}
-
-.microstep-card__text {
-  margin: 14px 0 0;
-  font-size: clamp(1.2rem, 3vw, 1.8rem);
-  line-height: 1.55;
-  font-weight: 900;
-  color: #3f2d0f;
-}
-
-.santuy-actions {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.pixel-btn {
-  min-height: 52px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 14px 18px;
-  border-radius: 18px;
-  text-decoration: none;
-  font-weight: 800;
-  transition:
-    transform 0.18s ease,
-    box-shadow 0.18s ease,
-    background 0.18s ease;
-  border: 3px solid transparent;
-}
-
-.pixel-btn:hover,
-.pixel-btn:focus-visible {
-  transform: translateY(-2px);
-  outline: none;
-}
-
-.pixel-btn--primary {
-  background: linear-gradient(180deg, #78d963 0%, #44b04c 100%);
-  border-color: #2d8a33;
-  color: #ffffff;
-  box-shadow: 0 8px 0 rgba(45, 138, 51, 0.24);
-}
-
-.pixel-btn--secondary {
-  background: linear-gradient(180deg, #ffffff 0%, #edf6ff 100%);
-  border-color: var(--blue);
-  color: var(--blue-dark);
-  box-shadow: 0 8px 0 rgba(19, 70, 134, 0.1);
-}
-
-@media (min-width: 640px) {
-  .emotion-grid {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .emotion-card {
-    grid-template-columns: 1fr;
-    align-items: start;
-  }
-
-  .emotion-card__icon {
-    width: 88px;
-    height: 88px;
-  }
-
-  .emotion-card__cta {
-    margin-top: 12px;
-  }
-
-  .santuy-actions {
-    flex-direction: row;
-  }
-
-  .santuy-actions > * {
-    flex: 1;
-  }
-}
-
-@media (max-width: 640px) {
-  .santuy-hero__top {
-    flex-direction: column;
-  }
-
-  .santuy-progress {
-    margin-top: 4px;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .emotion-card,
-  .pixel-btn,
-  .breathing-circle {
-    transition: none !important;
-    animation: none !important;
-  }
-
-  .breathing-circle {
-    transform: scale(0.88);
+  h2 {
+    font-size: 1.5rem;
+    line-height: 1.9rem;
   }
 }
