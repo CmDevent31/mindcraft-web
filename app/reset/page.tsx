@@ -5,7 +5,9 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Suspense, useEffect, useMemo } from "react";
 
 import {
+  DISCLAIMER,
   EMOTION_META,
+  HELPLINES,
   isEmotion,
   MICRO_STEPS_BY_EMOTION,
   ROUTES,
@@ -35,55 +37,114 @@ function ResetContent() {
   const microStep = MICRO_STEPS_BY_EMOTION[emotion];
 
   return (
-    <main className="santuy-shell">
-      <div className="santuy-frame">
-        <section className="santuy-hero santuy-hero--dawn">
-          <div className="santuy-hero__top">
-            <div>
-              <p className="santuy-kicker">SANTUY</p>
-              <h1 className="santuy-title">One small step still counts.</h1>
-              <p className="santuy-subtitle">
-                You checked in with <strong>{meta.title}</strong>. Here’s one
-                tiny step to help you reset.
-              </p>
-            </div>
+    <main className="min-h-screen bg-[var(--paper)] px-5 py-10 text-[var(--ink)]">
+      <div className="mx-auto flex w-full max-w-[760px] flex-col gap-8">
+        {/* Header */}
+        <section className="space-y-3">
+          <p className="text-sm font-semibold uppercase tracking-wide text-[var(--blue-dark)]">
+            Quest 3 · Reset
+          </p>
 
-            <div className="santuy-progress">
-              <span className="santuy-progress__dot santuy-progress__dot--done" />
-              <span className="santuy-progress__dot santuy-progress__dot--done" />
-              <span className="santuy-progress__dot santuy-progress__dot--active" />
-            </div>
-          </div>
+          <h1>One small step still counts.</h1>
 
-          <div className="santuy-tip">
-            <span className="santuy-tip__label">Quest 3</span>
-            <p>Progress, not perfection.</p>
-          </div>
+          <p className="max-w-xl leading-relaxed">
+            You checked in with{" "}
+            <span className="font-semibold">{meta.title}</span>. You do not
+            have to solve everything at once. Here is one tiny thing you can do
+            next.
+          </p>
         </section>
 
-        <section className="santuy-panel">
-          <div className="microstep-card">
-            <p className="microstep-card__label">Your micro-step</p>
-            <p className="microstep-card__text">{microStep}</p>
-          </div>
+        {/* Micro-step */}
+        <section className="rounded-[var(--radius-card)] border-2 border-[var(--yellow-dark)] bg-[var(--yellow-light)] p-6">
+          <p className="text-sm font-semibold uppercase tracking-wide text-[var(--yellow-dark)]">
+            Your micro-step
+          </p>
 
-          <div className="santuy-message">
-            <h2 className="santuy-message__title">That is enough for now.</h2>
-            <p className="santuy-message__body">
-              Small steps still move you forward, even if the day feels messy.
+          <p className="mt-4 text-2xl font-bold leading-relaxed">
+            {microStep}
+          </p>
+        </section>
+
+        {/* Support message */}
+        <section className="rounded-[var(--radius-card)] bg-[var(--white)] p-6">
+          <h2 className="text-xl font-bold">That is enough for now.</h2>
+
+          <p className="mt-2 leading-relaxed">
+            Small steps still move you forward, even when the day feels messy.
+            You do not need to earn rest or fix everything tonight.
+          </p>
+        </section>
+
+        {/* Helplines */}
+        <section className="space-y-4">
+          <div>
+            <h2 className="text-xl font-bold">
+              Need a little more support?
+            </h2>
+
+            <p className="mt-2 leading-relaxed">
+              These support lines are here if things feel heavier than a rough
+              afternoon.
             </p>
           </div>
 
-          <div className="santuy-actions">
-            <Link href={ROUTES.triage} className="pixel-btn pixel-btn--secondary">
-              Check in again
-            </Link>
+          <div className="grid gap-3">
+            {HELPLINES.map((helpline) => (
+              <a
+                key={helpline.name}
+                href={helpline.href}
+                target={
+                  helpline.href.startsWith("http")
+                    ? "_blank"
+                    : undefined
+                }
+                rel={
+                  helpline.href.startsWith("http")
+                    ? "noreferrer"
+                    : undefined
+                }
+                className="flex min-h-11 flex-col justify-center rounded-[var(--radius-card)] border-2 border-[var(--blue)] bg-[var(--white)] p-5 no-underline transition-transform hover:-translate-y-0.5"
+              >
+                <span className="font-bold text-[var(--blue-dark)]">
+                  {helpline.name}
+                </span>
 
-            <Link href={ROUTES.landing} className="pixel-btn pixel-btn--primary">
-              Back home
-            </Link>
+                <span className="mt-1 font-semibold text-[var(--ink)]">
+                  {helpline.number}
+                </span>
+
+                <span className="mt-1 text-sm leading-relaxed text-[var(--ink)]">
+                  {helpline.note}
+                </span>
+              </a>
+            ))}
           </div>
         </section>
+
+        {/* Disclaimer */}
+        <section className="rounded-[var(--radius-card)] border border-[var(--blue-light)] bg-[var(--white)] p-5">
+          <p className="m-0 text-sm leading-relaxed">
+            {DISCLAIMER}
+          </p>
+        </section>
+
+        {/* Actions */}
+        <div className="flex flex-col gap-3 sm:flex-row">
+          <Link
+            href={ROUTES.triage}
+            className="flex min-h-11 flex-1 items-center justify-center rounded-[var(--radius-pill)] border-2 border-[var(--blue)] px-5 py-3 font-semibold no-underline"
+          >
+            Check in again
+          </Link>
+
+          <Link
+            href={ROUTES.landing}
+            className="flex min-h-11 flex-1 items-center justify-center rounded-[var(--radius-pill)] bg-[var(--orange)] px-5 py-3 font-semibold text-[var(--ink)] no-underline"
+          >
+            Back home
+          </Link>
+        </div>
       </div>
     </main>
   );
@@ -93,11 +154,9 @@ export default function ResetPage() {
   return (
     <Suspense
       fallback={
-        <main className="santuy-shell">
-          <div className="santuy-frame">
-            <section className="santuy-panel">
-              <p>Loading your reset...</p>
-            </section>
+        <main className="min-h-screen bg-[var(--paper)] px-5 py-10 text-[var(--ink)]">
+          <div className="mx-auto w-full max-w-[760px]">
+            <p>Loading your reset...</p>
           </div>
         </main>
       }

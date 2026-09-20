@@ -1,92 +1,41 @@
 @import "tailwindcss";
 
 /*
- * santuy. Design System v1.0
- *
- * Global CSS hanya berisi:
- * - design tokens
- * - Tailwind theme mapping
- * - global typography
- * - accessibility defaults
- *
- * Styling khusus halaman seperti /triage, /breathe, /reset
- * sebaiknya berada di CSS Module masing-masing.
+ * santuy. Design System v1.0 — tokens as single source of truth.
+ * Task 2.1: Onest (head) + Nunito (body) via next/font variables
+ * (--font-head / --font-body set in app/layout.tsx).
+ * All usage below references tokens via var(); raw hex/px lives
+ * ONLY in :root token definitions + @theme mappings.
  */
 
 :root {
-  /* =========================================
-     BRAND COLORS
-     ========================================= */
-
-  /* Sky Blue */
+  /* Color — brand: Sky Blue */
   --blue-light: #60c2ee;
   --blue: #0f8ff6;
   --blue-dark: #0b64ac;
-
-  /* Sunshine Yellow */
+  /* Color — brand: Sunshine Yellow */
   --yellow-light: #fadb6f;
   --yellow: #f8c821;
   --yellow-dark: #ae8c17;
-
-  /* Ember Orange */
+  /* Color — brand: Ember Orange (action only) */
   --orange-light: #faa766;
   --orange: #f77713;
   --orange-dark: #ad530d;
-
-  /* Supporting colors */
+  /* Color — supporting & semantic */
   --green: #4caf7d;
-
-  /* Neutral colors */
   --ink: #15152e;
   --paper: #f9fafb;
   --white: #ffffff;
-
-  /* Semantic colors */
   --error: #e5484d;
   --error-light: #fbe4e4;
-  --error-text-on-light: #8a2c30;
-
   --disabled-bg: #e4dfda;
   --disabled-fg: #a39c93;
-
-  /* =========================================
-     SANTUY GAME PALETTE
-     ========================================= */
-
-  --game-navy-950: #061424;
-  --game-navy-900: #071b33;
-  --game-navy-850: #08233f;
-  --game-navy-800: #0c2c4f;
-  --game-navy-700: #173e69;
-
-  --game-blue-500: #477bb2;
-  --game-blue-400: #77a8d9;
-  --game-blue-300: #b9d8ff;
-
-  --game-green-500: #34b95e;
-  --game-green-400: #55e87b;
-  --game-green-300: #80ff92;
-
-  --game-cream: #fff3df;
-
-  --game-wood-700: #5c331d;
-  --game-wood-600: #6f3f20;
-  --game-wood-500: #8c512a;
-  --game-wood-400: #ad7040;
-
-  /* =========================================
-     SHAPE
-     ========================================= */
-
+  --error-text-on-light: #8a2c30;
+  /* Shape */
   --radius-pill: 999px;
   --radius-card: 24px;
   --radius-input: 16px;
-
-  /* =========================================
-     SPACING
-     Base unit: 4px
-     ========================================= */
-
+  /* Spacing (base unit 4px) */
   --sp-1: 4px;
   --sp-2: 8px;
   --sp-3: 12px;
@@ -95,117 +44,60 @@
   --sp-6: 32px;
   --sp-7: 48px;
   --sp-8: 64px;
-
-  /* =========================================
-     MOTION
-     ========================================= */
-
+  /* Motion */
   --ease: cubic-bezier(0.4, 0, 0.2, 1);
-  --ease-bounce: cubic-bezier(0.18, 0.9, 0.2, 1);
-
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   --dur: 450ms;
   --dur-fast: 200ms;
-  --dur-slow: 800ms;
-
-  /* =========================================
-     TYPE
-     next/font provides the actual variables
-     through app/layout.tsx.
-     ========================================= */
-
+  --dur-medium: 500ms;
+  /* Type (values provided by next/font; fallbacks per DS) */
   --font-head: "Onest", sans-serif;
   --font-body: "Nunito", sans-serif;
-
-  /*
-   * Temporary game-style fallback.
-   * Nanti kalau kita pakai pixel font original/legal,
-   * variable ini tinggal diganti di satu tempat.
-   */
-  --font-game:
-    "Courier New",
-    "Lucida Console",
-    ui-monospace,
-    monospace;
-
-  /* =========================================
-     LAYOUT
-     ========================================= */
-
+  /* Layout constants */
   --content-max: 760px;
   --gutter: var(--sp-5);
   --section-rhythm: var(--sp-8);
 }
 
-/* =============================================
-   TAILWIND THEME MAPPING
-   ============================================= */
-
 @theme inline {
   --color-blue-light: var(--blue-light);
   --color-blue: var(--blue);
   --color-blue-dark: var(--blue-dark);
-
   --color-yellow-light: var(--yellow-light);
   --color-yellow: var(--yellow);
   --color-yellow-dark: var(--yellow-dark);
-
   --color-orange-light: var(--orange-light);
   --color-orange: var(--orange);
   --color-orange-dark: var(--orange-dark);
-
   --color-green: var(--green);
-
   --color-ink: var(--ink);
   --color-paper: var(--paper);
   --color-white: var(--white);
-
   --color-error: var(--error);
   --color-error-light: var(--error-light);
-
   --color-background: var(--paper);
   --color-foreground: var(--ink);
-
   --font-head: var(--font-head);
   --font-body: var(--font-body);
   --font-sans: var(--font-body);
-
   --radius-pill: var(--radius-pill);
   --radius-card: var(--radius-card);
   --radius-input: var(--radius-input);
 }
 
-/* =============================================
-   BASE STYLES
-   ============================================= */
-
 @layer base {
-  *,
-  *::before,
-  *::after {
-    box-sizing: border-box;
-  }
-
   html {
     scroll-behavior: smooth;
-  }
-
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    min-height: 100%;
   }
 
   body {
     background: var(--paper);
     color: var(--ink);
-
     font-family: var(--font-body);
     font-size: var(--sp-4);
+    /* DS §3.1 Body 16/26 — typographic value, not spacing token */
     line-height: 1.625rem;
-
     -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
   }
 
   h1,
@@ -217,8 +109,6 @@
   }
 
   h1 {
-    margin: 0;
-
     font-weight: 700;
     font-size: 2.5rem;
     line-height: 3rem;
@@ -226,8 +116,6 @@
   }
 
   h2 {
-    margin: 0;
-
     font-weight: 700;
     font-size: 1.75rem;
     line-height: 2.125rem;
@@ -235,32 +123,10 @@
   }
 
   h3 {
-    margin: 0;
-
     font-weight: 600;
     font-size: 1.25rem;
     line-height: 1.75rem;
     letter-spacing: -0.01em;
-  }
-
-  p {
-    margin-top: 0;
-  }
-
-  img,
-  picture,
-  video,
-  canvas,
-  svg {
-    display: block;
-    max-width: 100%;
-  }
-
-  button,
-  input,
-  textarea,
-  select {
-    font: inherit;
   }
 
   a {
@@ -268,19 +134,14 @@
     text-underline-offset: var(--sp-1);
   }
 
-  /*
-   * Accessibility:
-   * visible keyboard focus ring.
-   */
+  /* AA focus ring — 3px solid blue + 3px offset */
   :focus-visible {
     outline: 3px solid var(--blue);
     outline-offset: 3px;
     border-radius: var(--radius-input);
   }
 
-  /*
-   * Touch-target floor.
-   */
+  /* Touch-target floor: 44×44px (AAA-aligned, DS §7.4) */
   button,
   a,
   [role="button"],
@@ -302,50 +163,374 @@
   }
 }
 
-/* =============================================
-   ACCESSIBILITY — REDUCED MOTION
-   ============================================= */
-
 @media (prefers-reduced-motion: reduce) {
   :root {
     --dur: 1ms;
     --dur-fast: 1ms;
-    --dur-slow: 1ms;
     --ease: linear;
-    --ease-bounce: linear;
-  }
-
-  html {
-    scroll-behavior: auto;
+    --ease-out: linear;
   }
 
   *,
   *::before,
   *::after {
     animation-duration: 1ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 1ms !important;
     scroll-behavior: auto !important;
   }
 }
 
-/* =============================================
-   SMALL SCREEN BASE ADJUSTMENTS
-   ============================================= */
 
-@media (max-width: 480px) {
-  :root {
-    --gutter: var(--sp-4);
-    --section-rhythm: var(--sp-7);
+
+
+.breathing-circle {
+  position: absolute;
+  width: 12rem;
+  height: 12rem;
+  border-radius: var(--radius-pill);
+  background: var(--blue-light);
+  opacity: 0.35;
+  transform: scale(0.75);
+}
+
+.breathing-inhale {
+  animation: breathe-in 4s linear forwards;
+}
+
+.breathing-hold {
+  animation: breathe-hold 7s linear forwards;
+  transform: scale(1);
+}
+
+.breathing-exhale {
+  animation: breathe-out 8s linear forwards;
+}
+
+@keyframes breathe-in {
+  from {
+    transform: scale(0.75);
   }
 
-  h1 {
-    font-size: 2rem;
-    line-height: 2.4rem;
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes breathe-hold {
+  from,
+  to {
+    transform: scale(1);
+  }
+}
+
+@keyframes breathe-out {
+  from {
+    transform: scale(1);
   }
 
-  h2 {
-    font-size: 1.5rem;
-    line-height: 1.9rem;
+  to {
+    transform: scale(0.75);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .breathing-circle {
+    animation: none !important;
+    transform: scale(0.85);
+  }
+}
+
+/*
+ * Global button system — change global-button-variants.
+ * `.btn` carries shared structure + tactile press mechanics only;
+ * color lives in `.btn-primary` / `.btn-secondary` (task group 2).
+ * Focus-visible is inherited from the global `:focus-visible` rule above
+ * (DS §7.3) — no per-button override. Reduced-motion is inherited from
+ * the global `prefers-reduced-motion` collapse — transitions drop to ~0ms.
+ */
+@layer components {
+  .btn {
+    display: flex;
+    width: 100%;
+    /* Fixed control height per design (explicit requirement); clears the 44px floor. */
+    height: 46px;
+    align-items: center;
+    justify-content: center;
+    gap: var(--sp-2);
+    padding: 0 var(--sp-5);
+    border: 1px solid transparent;
+    border-radius: var(--radius-pill);
+    font-family: var(--font-head);
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+    transition:
+      transform var(--dur-fast) var(--ease),
+      box-shadow var(--dur-fast) var(--ease),
+      background-color var(--dur-fast) var(--ease);
+  }
+
+  /* Shared press mechanics — variants supply their own shadow colors. */
+  .btn:not(:disabled):active {
+    transform: translateY(2px);
+  }
+
+  /* Task 2.1: Primary — filled --blue, white bold label (DS §9.1).
+     Resting treatment only; hover/active shadow physics land in 3.1. */
+  .btn-primary {
+    background-color: var(--blue);
+    border-color: var(--blue-dark);
+    color: var(--white);
+    box-shadow: 0 4px var(--blue-dark);
+  }
+
+  /* Task 2.2: Secondary — light surface, --orange label, soft
+     token-mixed hairline border + shadow. Resting treatment only. */
+  .btn-secondary {
+    background-color: var(--white);
+    border-color: color-mix(in srgb, var(--orange-dark) 16%, transparent);
+    color: var(--orange);
+    box-shadow: 0 3px color-mix(in srgb, var(--ink) 10%, transparent);
+  }
+
+  /* Hover pop + pressed physics per variant. Hover is gated behind
+     (hover: hover) so touch taps never stick in a hovered state, and
+     guards keep the inert state untouched. :active sorts after :hover
+     and re-states the shift so the press always wins while both match. */
+  @media (hover: hover) {
+    .btn-primary:not(:disabled):not([aria-disabled="true"]):hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px var(--blue-dark);
+    }
+
+    .btn-secondary:not(:disabled):not([aria-disabled="true"]):hover {
+      transform: translateY(-1px);
+      border-color: transparent;
+      box-shadow: 0 6px color-mix(in srgb, var(--ink) 10%, transparent);
+    }
+  }
+
+  .btn-primary:not(:disabled):not([aria-disabled="true"]):active {
+    transform: translateY(2px);
+    box-shadow: 0 1px var(--blue-dark);
+  }
+
+  .btn-secondary:not(:disabled):not([aria-disabled="true"]):active {
+    transform: translateY(2px);
+    box-shadow: 0 1px color-mix(in srgb, var(--ink) 10%, transparent);
+  }
+
+  /* Get Help variant — same tactile system, action-orange colors.
+     Sole exception to the one-Primary rule: crisis help must stay
+     orange (DS action-color rule). Width auto: it lives in the header,
+     not in full-width CTA rows. */
+  .btn-help {
+    width: auto;
+    background-color: var(--orange);
+    border-color: var(--orange-dark);
+    color: var(--white);
+    box-shadow: 0 4px var(--orange-dark);
+  }
+
+  @media (hover: hover) {
+    .btn-help:not(:disabled):not([aria-disabled="true"]):hover {
+      transform: translateY(-1px);
+      box-shadow: 0 6px var(--orange-dark);
+    }
+  }
+
+  .btn-help:not(:disabled):not([aria-disabled="true"]):active {
+    transform: translateY(2px);
+    box-shadow: 0 1px var(--orange-dark);
+  }
+
+  /* Task 1.2: inert state. Native <button disabled> is unfocusable and
+     ignores pointer/keyboard activation; `.btn` on <a> uses aria-disabled. */
+  .btn:disabled,
+  .btn[aria-disabled="true"] {
+    background-color: var(--disabled-bg);
+    border-color: transparent;
+    color: var(--disabled-fg);
+    box-shadow: none;
+    transform: none;
+    cursor: not-allowed;
+  }
+
+  .btn[aria-disabled="true"] {
+    pointer-events: none;
+  }
+}
+
+/*
+ * Meme deck enter transition — replayed per tap via React key remount.
+ * Slides in from the travel direction with a fade; transform + opacity
+ * only (GPU). Taps are user-paced, so predetermined keyframes are fine.
+ * Reduced motion inherits the global collapse above (all animations → 1ms).
+ */
+@keyframes meme-enter-next {
+  from {
+    opacity: 0;
+    transform: translateX(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes meme-enter-prev {
+  from {
+    opacity: 0;
+    transform: translateX(-24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.meme-enter-next {
+  animation: meme-enter-next var(--dur-fast) var(--ease);
+}
+
+.meme-enter-prev {
+  animation: meme-enter-prev var(--dur-fast) var(--ease);
+}
+
+/*
+ * Running banner — seamless infinite leftward loop. Track holds four
+ * identical rows; translating -50% (two rows) loops without a jump and
+ * stays covered on ultrawide. Speed: full pass ~40s (slow, calm).
+ * Reduced motion inherits the global collapse (animations → 1ms).
+ */
+@keyframes marquee-scroll {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  animation: marquee-scroll 40s linear infinite;
+  will-change: transform;
+}
+
+/*
+ * FAQ + Features accordions — CSS transition only.
+ * Native <details> hides its content instantly on close, so
+ * animating an inner wrapper alone can never smooth the
+ * close. Instead the UA's ::details-content box is animated
+ * 0 <-> auto (needs interpolate-size), which moves siblings
+ * down/up instead of hiding the answer. Opacity + a 4px
+ * drift fade the text; the chevron rotates on the same
+ * curve so open and close read as one motion.
+ */
+#faq details,
+#features details {
+  interpolate-size: allow-keywords;
+}
+
+#faq details::details-content,
+#features details::details-content {
+  block-size: 0;
+  overflow: clip;
+  transition:
+    block-size var(--dur-medium) var(--ease-out),
+    content-visibility var(--dur-medium) var(--ease-out);
+  transition-behavior: allow-discrete;
+}
+
+#faq details[open]::details-content,
+#features details[open]::details-content {
+  block-size: auto;
+}
+
+.faq-panel > div {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.faq-panel p {
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity var(--dur-medium) var(--ease-out),
+    transform var(--dur-medium) var(--ease-out);
+}
+
+#faq details[open] > .faq-panel p,
+#features details[open] > .faq-panel p {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.faq-chevron {
+  transition: transform var(--dur-medium) var(--ease-out);
+}
+
+#faq details[open] .faq-chevron,
+#features details[open] .faq-chevron {
+  transform: rotate(180deg);
+}
+
+/*
+ * Features accordion rows — one shared column template for the
+ * summary row and the body row, so the step title and its
+ * description always share the same left edge. Change the
+ * icon column here once instead of syncing indents per element.
+ */
+#features .steps-cols {
+  display: grid;
+  grid-template-columns: 2.75rem 1fr auto;
+  column-gap: var(--sp-3);
+}
+
+/*
+ * Features auto-advance progress — a linear scaleX fill that runs
+ * for exactly one rotation interval (see ROTATE_MS in
+ * components/StepsAccordion.tsx). transform + opacity only,
+ * linear because it is constant motion. Remounts (key change)
+ * restart it in sync with the timer.
+ */
+@keyframes steps-progress-fill {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+#features .steps-progress-fill {
+  transform-origin: left center;
+  background: var(--orange);
+  animation: steps-progress-fill 6s linear forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #features .steps-progress-fill {
+    animation: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #faq details::details-content,
+  #features details::details-content {
+    transition: none;
+  }
+
+  .faq-panel p {
+    transition: opacity var(--dur-fast) linear;
+  }
+
+  .faq-chevron {
+    transition: none;
   }
 }

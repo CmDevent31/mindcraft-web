@@ -7,8 +7,8 @@
 ## 2. Shell + Landing — Alif (Days 2–6)
 
 - [x] 2.1 [Alif] Replace Geist with Onest+Nunito and port Design System tokens to `app/globals.css`, verify no raw hex/px remains via visual diff
-- [ ] 2.2 [Alif] Build `app/layout.tsx` + bottom tab bar + persistent HelpButton + footer disclaimer, verify Help reaches `/reset` from every route on 360px viewport
-- [ ] 2.3 [Alif] Build `/` landing hero + Start CTA to `/triage`, verify tap reaches `/triage` in ≤2s with ≥44×44px targets
+- [x] 2.2 [Alif] Build `app/layout.tsx` + bottom tab bar + persistent HelpButton + footer disclaimer, verify Help reaches `/reset` from every route on 360px viewport
+- [x] 2.3 [Alif] Build `/` landing hero + Start CTA to `/triage`, verify tap reaches `/triage` in ≤2s with ≥44×44px targets
 - [ ] 2.4 [Alif] Deliver illustrations + validation copy bank in DS voice, verify copy is non-diagnostic and plain-language
 
 ## 3. Triage + Breathing + Micro-step — Jo (Days 2–6)
@@ -21,9 +21,9 @@
 ## 4. Meme Lab + Helpline — Malky (Days 2–6)
 
 - [x] 4.1 [Malky] Author `data/memes.json` + helplines, verify JSON validates against `lib/content.ts` types
-- [ ] 4.2 [Malky] Optimize to WebP, upload to R2, add `remotePatterns` to `next.config.ts`, verify all URLs return 200 with public cache headers
-- [ ] 4.3 [Malky] Build `/memes/[emotion]` deck (one per viewport, Next/Continue, no canvas entry), verify emotion filtering + advance to `/reset` preserves emotion
-- [ ] 4.4 [Malky] Build `/reset` helpline list (`tel:`/`wa.me`) + disclaimer, verify each helpline opens correct target and disclaimer is visible without interaction
+- [x] 4.2 [Malky] Optimize to WebP, upload to R2, add `remotePatterns` to `next.config.ts`, verify all URLs return 200 with public cache headers
+- [x] 4.3 [Malky] Build `/memes/[emotion]` deck (one per viewport, Next/Continue, no canvas entry), verify emotion filtering + advance to `/reset` preserves emotion
+- [x] 4.4 [Malky] Build `/reset` helpline list (`tel:`/`wa.me`) + disclaimer, verify each helpline opens correct target and disclaimer is visible without interaction
 
 ## 5. Integrate + Audit + Freeze + Deploy (Days 7–10)
 

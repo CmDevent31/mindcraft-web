@@ -18,6 +18,42 @@
     "emotion": "executive-dysfunction"
   },
   {
+    "src": "/memes/exec-04.webp",
+    "alt": "Pesan bahwa pisang takkan tercapai tanpa keberanian memanjat — mulai butuh nyali",
+    "validation": "Langkah pertama memang nyeremin. Tapi pisangnya nggak bakal turun sendiri.",
+    "emotion": "executive-dysfunction"
+  },
+  {
+    "src": "/memes/exec-05.webp",
+    "alt": "Pesan bahwa segalanya bisa lebih baik kalau kamu benar-benar mencoba",
+    "validation": "Versi dirimu yang udah mulai itu beneran ada. Tinggal dicoba.",
+    "emotion": "executive-dysfunction"
+  },
+  {
+    "src": "/memes/exec-06.webp",
+    "alt": "Pesan bahwa kutipan motivasi tak berguna tanpa aksi nyata darimu",
+    "validation": "Nggak perlu quotes baru. Satu aksi kecil hari ini udah cukup.",
+    "emotion": "executive-dysfunction"
+  },
+  {
+    "src": "/memes/exec-07.webp",
+    "alt": "Pesan bahwa satu jam beraksi mengalahkan sepuluh jam berpikir",
+    "validation": "Berantakan dikit nggak apa. Yang penting lempar dulu.",
+    "emotion": "executive-dysfunction"
+  },
+  {
+    "src": "/memes/exec-08.webp",
+    "alt": "Pesan bahwa tak perlu menunggu waktu yang pas — mulai saja dari menit ini",
+    "validation": "Nggak harus nunggu momen sempurna. Mulai dari menit ini juga boleh.",
+    "emotion": "executive-dysfunction"
+  },
+  {
+    "src": "/memes/stay-hard.webp",
+    "alt": "Pesan bahwa putus asa itu mudah sedangkan berharap itu sulit — dan memilih bertahan",
+    "validation": "Milih berharap itu kerja keras. Salut, kamu masih di sini.",
+    "emotion": "executive-dysfunction"
+  },
+  {
     "src": "/memes/social-01.webp",
     "alt": "Seseorang memutar ulang percakapan di kepalanya sebelum tidur",
     "validation": "Cuma kamu yang masih ingat momen itu. Serius.",
@@ -36,6 +72,36 @@
     "emotion": "social-hangxiety"
   },
   {
+    "src": "/memes/social-04.webp",
+    "alt": "Pesan jangan rusak koneksi yang baik dengan memikirkan semua kemungkinan buruk",
+    "validation": "Lepasin dikit kendalinya. Koneksi yang baik nggak butuh kamu sempurna.",
+    "emotion": "social-hangxiety"
+  },
+  {
+    "src": "/memes/social-05.webp",
+    "alt": "Pesan bahwa penderitaan berhenti saat kamu memutuskan untuk berhenti",
+    "validation": "Replay semalam boleh berhenti kapan pun kamu mau. Termasuk sekarang.",
+    "emotion": "social-hangxiety"
+  },
+  {
+    "src": "/memes/social-06.webp",
+    "alt": "Pesan bahwa baik atau buruk, semuanya hanya sementara dan akan lewat",
+    "validation": "Rasa malu ini ada batas waktunya. Beneran, bakal lewat.",
+    "emotion": "social-hangxiety"
+  },
+  {
+    "src": "/memes/social-07.webp",
+    "alt": "Pesan bahwa malu sedikit demi koneksi dengan manusia lain itu wajar",
+    "validation": "Malu dikit demi nyapa duluan itu harga yang wajar banget.",
+    "emotion": "social-hangxiety"
+  },
+  {
+    "src": "/memes/social-08.webp",
+    "alt": "Pesan bahwa mengungkapkan perasaan takkan merusak koneksi yang asli",
+    "validation": "Ngomong jujur nggak ngerusak yang tulus. Justru sebaliknya.",
+    "emotion": "social-hangxiety"
+  },
+  {
     "src": "/memes/imposter-01.webp",
     "alt": "Mahasiswa duduk di kelas merasa paling tidak paham di antara temannya",
     "validation": "Merasa kurang pintar bukan bukti kamu kurang pintar.",
@@ -51,6 +117,24 @@
     "src": "/memes/imposter-03.webp",
     "alt": "Satu nilai jelek ditulis besar di antara banyak nilai bagus yang terabaikan",
     "validation": "Satu nilai bukan ringkasan dari siapa kamu.",
+    "emotion": "academic-imposter"
+  },
+  {
+    "src": "/memes/imposter-04.webp",
+    "alt": "Pesan melawan sindrom penipu: tidak hari ini",
+    "validation": "Hari ini kita jawab bareng: nggak hari ini.",
+    "emotion": "academic-imposter"
+  },
+  {
+    "src": "/memes/imposter-05.webp",
+    "alt": "Pesan bahwa boleh terlambat, mengulang, ragu, dan gagal — tetap bisa berhasil",
+    "validation": "Telat mulai, ngulang, ragu, gagal — semuanya boleh. Tetap bisa berhasil.",
+    "emotion": "academic-imposter"
+  },
+  {
+    "src": "/memes/imposter-06.webp",
+    "alt": "Pesan bahwa jalan yang lebih sulit bisa berarti panggilan hidup yang lebih tinggi",
+    "validation": "Berat bukan berarti kamu salah jalan. Bisa jadi tujuanmu memang besar.",
     "emotion": "academic-imposter"
   }
 ]

@@ -92,7 +92,9 @@ function BreatheContent() {
 
   const phase = PHASES[phaseIndex];
   const meta = EMOTION_META[emotion];
+
   const memeRoute = ROUTES.memes(emotion);
+  const resetHref = `${ROUTES.reset}?emotion=${emotion}`;
 
   return (
     <main className="santuy-shell">
@@ -101,14 +103,19 @@ function BreatheContent() {
           <div className="santuy-hero__top">
             <div>
               <p className="santuy-kicker">SANTUY</p>
-              <h1 className="santuy-title">Take one calm breath at a time.</h1>
+
+              <h1 className="santuy-title">
+                Take one calm breath at a time.
+              </h1>
+
               <p className="santuy-subtitle">
-                You checked in with <strong>{meta.title}</strong>. You do not
-                have to solve everything right now.
+                You checked in with{" "}
+                <strong>{meta.title}</strong>. You do not have to solve
+                everything right now.
               </p>
             </div>
 
-            <div className="santuy-progress">
+            <div className="santuy-progress" aria-hidden="true">
               <span className="santuy-progress__dot santuy-progress__dot--done" />
               <span className="santuy-progress__dot santuy-progress__dot--active" />
               <span className="santuy-progress__dot" />
@@ -116,8 +123,13 @@ function BreatheContent() {
           </div>
 
           <div className="santuy-tip">
-            <span className="santuy-tip__label">Quest 2</span>
-            <p>Follow the words and timer. The motion is just a visual guide.</p>
+            <span className="santuy-tip__label">
+              Quest 2
+            </span>
+
+            <p>
+              Follow the words and timer. The motion is just a visual guide.
+            </p>
           </div>
         </section>
 
@@ -134,9 +146,17 @@ function BreatheContent() {
             />
 
             <div className="breathing-stage__content">
-              <p className="breathing-stage__phase">{phase.label}</p>
-              <p className="breathing-stage__count">{secondsLeft}</p>
-              <p className="breathing-stage__helper">{phase.helper}</p>
+              <p className="breathing-stage__phase">
+                {phase.label}
+              </p>
+
+              <p className="breathing-stage__count">
+                {secondsLeft}
+              </p>
+
+              <p className="breathing-stage__helper">
+                {phase.helper}
+              </p>
             </div>
           </div>
 
@@ -157,7 +177,10 @@ function BreatheContent() {
 
           {cycleComplete ? (
             <div className="santuy-message">
-              <h2 className="santuy-message__title">Nice. One cycle done.</h2>
+              <h2 className="santuy-message__title">
+                Nice. One cycle done.
+              </h2>
+
               <p className="santuy-message__body">
                 You do not need to feel perfect. A little steadier is already a
                 win.
@@ -165,22 +188,49 @@ function BreatheContent() {
             </div>
           ) : (
             <div className="santuy-message">
-              <h2 className="santuy-message__title">Stay with the rhythm.</h2>
+              <h2 className="santuy-message__title">
+                Stay with the rhythm.
+              </h2>
+
               <p className="santuy-message__body">
                 Inhale for 4, hold for 7, exhale for 8.
               </p>
             </div>
           )}
 
-          <div className="santuy-actions">
-            <Link href={memeRoute} className="pixel-btn pixel-btn--secondary">
-              Skip for now
-            </Link>
+          <div className="santuy-breathe-actions">
+            {!cycleComplete ? (
+              <>
+                <Link
+                  href={resetHref}
+                  className="santuy-action-btn santuy-action-btn--ghost"
+                >
+                  Skip to micro-step
+                </Link>
 
-            {cycleComplete && (
-              <Link href={memeRoute} className="pixel-btn pixel-btn--primary">
-                Continue
-              </Link>
+                <Link
+                  href={memeRoute}
+                  className="santuy-action-btn santuy-action-btn--ghost"
+                >
+                  Skip to meme
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  href={resetHref}
+                  className="santuy-action-btn santuy-action-btn--ghost"
+                >
+                  Skip to micro-step
+                </Link>
+
+                <Link
+                  href={memeRoute}
+                  className="santuy-action-btn santuy-action-btn--primary"
+                >
+                  Continue to meme
+                </Link>
+              </>
             )}
           </div>
         </section>
