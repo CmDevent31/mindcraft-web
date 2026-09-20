@@ -2,18 +2,9 @@
 
 import Link from "next/link";
 import { useRouter, useSearchParams } from "next/navigation";
-import {
-  Suspense,
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
 
-import {
-  EMOTION_META,
-  isEmotion,
-  ROUTES,
-} from "@/lib/content";
+import { EMOTION_META, isEmotion, ROUTES } from "@/lib/content";
 
 type PhaseName = "inhale" | "hold" | "exhale";
 
@@ -21,6 +12,7 @@ interface Phase {
   name: PhaseName;
   label: string;
   duration: number;
+  helper: string;
 }
 
 const PHASES: Phase[] = [
@@ -28,16 +20,19 @@ const PHASES: Phase[] = [
     name: "inhale",
     label: "Breathe in",
     duration: 4,
+    helper: "Gently fill your lungs.",
   },
   {
     name: "hold",
     label: "Hold",
     duration: 7,
+    helper: "Let the calm settle for a second.",
   },
   {
     name: "exhale",
     label: "Breathe out",
     duration: 8,
+    helper: "Release the tension slowly.",
   },
 ];
 
@@ -52,9 +47,7 @@ function BreatheContent() {
   }, [emotionParam]);
 
   const [phaseIndex, setPhaseIndex] = useState(0);
-  const [secondsLeft, setSecondsLeft] = useState(
-    PHASES[0].duration
-  );
+  const [secondsLeft, setSecondsLeft] = useState(PHASES[0].duration);
   const [cycleComplete, setCycleComplete] = useState(false);
 
   useEffect(() => {
@@ -74,8 +67,7 @@ function BreatheContent() {
           return current - 1;
         }
 
-        const isLastPhase =
-          phaseIndex === PHASES.length - 1;
+        const isLastPhase = phaseIndex === PHASES.length - 1;
 
         if (isLastPhase) {
           setCycleComplete(true);
@@ -83,7 +75,6 @@ function BreatheContent() {
         }
 
         const nextPhaseIndex = phaseIndex + 1;
-
         setPhaseIndex(nextPhaseIndex);
 
         return PHASES[nextPhaseIndex].duration;
@@ -101,63 +92,82 @@ function BreatheContent() {
 
   const phase = PHASES[phaseIndex];
   const meta = EMOTION_META[emotion];
+
   const memeRoute = ROUTES.memes(emotion);
   const resetHref = `${ROUTES.reset}?emotion=${emotion}`;
 
   return (
-    <main className="min-h-screen bg-[var(--paper)] px-5 py-10 text-[var(--ink)]">
-      <div className="mx-auto flex w-full max-w-[760px] flex-col items-center gap-8 text-center">
-        <div className="w-full space-y-3 text-left">
-          <p className="text-sm font-semibold uppercase tracking-wide text-[var(--blue-dark)]">
-            One moment first
-          </p>
+    <main className="santuy-shell">
+      <div className="santuy-frame">
+        <section className="santuy-hero santuy-hero--night">
+          <div className="santuy-hero__top">
+            <div>
+              <p className="santuy-kicker">SANTUY</p>
 
-          <h1>Slow things down for a second.</h1>
+              <h1 className="santuy-title">
+                Take one calm breath at a time.
+              </h1>
 
-          <p>
-            You picked{" "}
-            <span className="font-semibold">
-              {meta.title}
+              <p className="santuy-subtitle">
+                You checked in with{" "}
+                <strong>{meta.title}</strong>. You do not have to solve
+                everything right now.
+              </p>
+            </div>
+
+            <div className="santuy-progress" aria-hidden="true">
+              <span className="santuy-progress__dot santuy-progress__dot--done" />
+              <span className="santuy-progress__dot santuy-progress__dot--active" />
+              <span className="santuy-progress__dot" />
+            </div>
+          </div>
+
+          <div className="santuy-tip">
+            <span className="santuy-tip__label">
+              Quest 2
             </span>
-            . No need to fix everything right now.
-          </p>
-        </div>
+
+            <p>
+              Follow the words and timer. The motion is just a visual guide.
+            </p>
+          </div>
+        </section>
 
         <section
-          className="flex w-full flex-col items-center gap-8 rounded-[var(--radius-card)] bg-[var(--white)] p-6"
+          className="santuy-panel santuy-panel--breathing"
           aria-live="polite"
           aria-label="Guided breathing exercise"
         >
-          <div className="relative flex h-64 w-64 items-center justify-center">
+          <div className="breathing-stage">
             <div
               key={phase.name}
               className={`breathing-circle breathing-${phase.name}`}
               aria-hidden="true"
             />
 
-            <div className="absolute z-10 flex flex-col items-center">
-              <p className="text-xl font-semibold">
+            <div className="breathing-stage__content">
+              <p className="breathing-stage__phase">
                 {phase.label}
               </p>
 
-              <p className="mt-2 text-6xl font-bold tabular-nums">
+              <p className="breathing-stage__count">
                 {secondsLeft}
               </p>
 
-              <p className="mt-2 text-sm">
-                {phase.duration} second phase
+              <p className="breathing-stage__helper">
+                {phase.helper}
               </p>
             </div>
           </div>
 
-          <div className="flex w-full max-w-sm justify-between gap-2 text-sm">
+          <div className="breathing-legend">
             {PHASES.map((item, index) => (
               <span
                 key={item.name}
-                className={`rounded-[var(--radius-pill)] px-3 py-2 ${
+                className={`breathing-legend__chip ${
                   index === phaseIndex && !cycleComplete
-                    ? "bg-[var(--blue)] font-semibold text-[var(--white)]"
-                    : "bg-[var(--paper)]"
+                    ? "breathing-legend__chip--active"
+                    : ""
                 }`}
               >
                 {item.label} {item.duration}s
@@ -166,55 +176,64 @@ function BreatheContent() {
           </div>
 
           {cycleComplete ? (
-            <div className="space-y-2">
-              <h2>Nice. One cycle done.</h2>
+            <div className="santuy-message">
+              <h2 className="santuy-message__title">
+                Nice. One cycle done.
+              </h2>
 
-              <p>
-                You do not have to feel completely better.
-                A little steadier is enough.
+              <p className="santuy-message__body">
+                You do not need to feel perfect. A little steadier is already a
+                win.
               </p>
             </div>
           ) : (
-            <p className="max-w-md">
-              Follow the words and the timer. The
-              circle is only a visual cue.
-            </p>
-          )}
-        </section>
+            <div className="santuy-message">
+              <h2 className="santuy-message__title">
+                Stay with the rhythm.
+              </h2>
 
-        <div className="flex w-full flex-col gap-3 sm:flex-row">
-          {!cycleComplete ? (
-            <>
-              <Link
-                href={resetHref}
-                className="btn btn-secondary flex-1"
-              >
-                Skip to micro-step
-              </Link>
-              <Link
-                href={memeRoute}
-                className="btn btn-secondary flex-1"
-              >
-                Skip to meme
-              </Link>
-            </>
-          ) : (
-            <>
-              <Link
-                href={resetHref}
-                className="btn btn-secondary flex-1"
-              >
-                Skip to micro-step
-              </Link>
-              <Link
-                href={memeRoute}
-                className="btn btn-primary flex-1"
-              >
-                Continue to meme
-              </Link>
-            </>
+              <p className="santuy-message__body">
+                Inhale for 4, hold for 7, exhale for 8.
+              </p>
+            </div>
           )}
-        </div>
+
+          <div className="santuy-breathe-actions">
+            {!cycleComplete ? (
+              <>
+                <Link
+                  href={resetHref}
+                  className="santuy-action-btn santuy-action-btn--ghost"
+                >
+                  Skip to micro-step
+                </Link>
+
+                <Link
+                  href={memeRoute}
+                  className="santuy-action-btn santuy-action-btn--ghost"
+                >
+                  Skip to meme
+                </Link>
+              </>
+            ) : (
+              <>
+                <Link
+                  href={resetHref}
+                  className="santuy-action-btn santuy-action-btn--ghost"
+                >
+                  Skip to micro-step
+                </Link>
+
+                <Link
+                  href={memeRoute}
+                  className="santuy-action-btn santuy-action-btn--primary"
+                >
+                  Continue to meme
+                </Link>
+              </>
+            )}
+          </div>
+        </section>
       </div>
     </main>
   );
@@ -224,9 +243,11 @@ export default function BreathePage() {
   return (
     <Suspense
       fallback={
-        <main className="min-h-screen bg-[var(--paper)] px-5 py-10 text-[var(--ink)]">
-          <div className="mx-auto w-full max-w-[760px]">
-            <p>Loading breathing exercise...</p>
+        <main className="santuy-shell">
+          <div className="santuy-frame">
+            <section className="santuy-panel">
+              <p>Loading breathing exercise...</p>
+            </section>
           </div>
         </main>
       }
